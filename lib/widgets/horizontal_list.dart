@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/model/anime.dart';
+import 'package:hoshi_list/model/media.dart';
 import 'package:hoshi_list/screens/anime_manga_grid.dart';
 import 'package:hoshi_list/widgets/anime_manga_card.dart';
 
 class HorizontalList extends StatelessWidget {
   const HorizontalList({super.key, required this.items, required this.title});
 
-  final List<Anime> items;
+  final List<Media> items;
   final String title;
 
   @override

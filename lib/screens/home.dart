@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hoshi_list/screens/home/anime.dart';
+import 'package:hoshi_list/screens/home/manga.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,12 +24,7 @@ class HomeScreen extends StatelessWidget {
 
           // Tab content
           const Expanded(
-            child: TabBarView(
-              children: [
-                AnimeHomeScreen(),
-                Center(child: Text('Manga Content')),
-              ],
-            ),
+            child: TabBarView(children: [AnimeHomeScreen(), MangaHomeScreen()]),
           ),
         ],
       ),
