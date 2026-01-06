@@ -13,21 +13,18 @@ class AnimeMangaGrid extends StatelessWidget {
       appBar: AppBar(title: Text(title)),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GridView(
+        child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             childAspectRatio: 2 / 3,
           ),
-          children: [
-            for (var item in items)
-              SizedBox(
-                height: 180,
-                child: AnimeMangaCard(
-                  imageUrl: item.imageUrl,
-                  title: item.title,
-                ),
-              ),
-          ],
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            final item = items[index];
+            return SizedBox(
+              child: AnimeMangaCard(imageUrl: item.imageUrl, title: item.title),
+            );
+          },
         ),
       ),
     );
