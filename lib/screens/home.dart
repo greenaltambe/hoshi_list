@@ -5,10 +5,31 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Welcome to Hoshi List',
-        style: Theme.of(context).textTheme.headlineMedium,
+    return DefaultTabController(
+      length: 2,
+      child: Column(
+        children: [
+          // Top tabs
+          Material(
+            color: Theme.of(context).colorScheme.surface,
+            child: const TabBar(
+              tabs: [
+                Tab(icon: null, text: 'Anime'),
+                Tab(icon: null, text: 'Manga'),
+              ],
+            ),
+          ),
+
+          // Tab content
+          const Expanded(
+            child: TabBarView(
+              children: [
+                Center(child: Text('Anime Content')),
+                Center(child: Text('Manga Content')),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

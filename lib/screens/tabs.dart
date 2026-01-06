@@ -16,6 +16,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedIndex = 0; // Denotes the current selectd index in bottom nav bar
 
+  // Method to create an animated icon switcher for navigation destinations
   Widget _animatedIconSwitcher(
     Icon selectedIcon,
     Icon unselectedIcon,
