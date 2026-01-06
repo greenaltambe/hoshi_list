@@ -18,16 +18,18 @@ class _MediaDescriptionState extends State<MediaDescription> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
-          AnimatedSize(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-            child: Text(
+          AnimatedCrossFade(
+            firstChild: Text(
               widget.description,
-              maxLines: _isExpanded ? null : 2,
-              overflow: _isExpanded
-                  ? TextOverflow.visible
-                  : TextOverflow.ellipsis,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
+            secondChild: Text(widget.description),
+            crossFadeState: _isExpanded
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            duration: const Duration(milliseconds: 100),
+            alignment: Alignment.topLeft,
           ),
           IconButton(
             icon: _isExpanded
