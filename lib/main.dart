@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hoshi_list/screens/tabs.dart';
 import 'package:hoshi_list/theme/app_theme.dart';
 import 'package:hoshi_list/theme/color_schemes.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final colorScheme = ColorScheme.fromSeed(seedColor: Colors.deepPurple);
 final textTheme = GoogleFonts.notoSansTextTheme();
@@ -11,7 +12,7 @@ final textTheme = GoogleFonts.notoSansTextTheme();
 final theme = ThemeData(colorScheme: colorScheme, textTheme: textTheme);
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

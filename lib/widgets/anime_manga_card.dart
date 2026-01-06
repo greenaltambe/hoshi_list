@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hoshi_list/model/media.dart';
+import 'package:hoshi_list/screens/media_details.dart';
 
 class AnimeMangaCard extends StatelessWidget {
-  const AnimeMangaCard({
-    super.key,
-    required this.imageUrl,
-    required this.title,
-  });
+  const AnimeMangaCard({super.key, required this.item});
 
-  final String imageUrl;
-  final String title;
+  final Media item;
+
+  void _onTapCard(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => MediaDetailsScreen(item: item)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => _onTapCard(context),
       splashFactory: InkRipple.splashFactory,
       borderRadius: BorderRadius.circular(16),
       child: Material(
@@ -26,7 +29,7 @@ class AnimeMangaCard extends StatelessWidget {
             child: Stack(
               children: [
                 Image.network(
-                  imageUrl,
+                  item.imageUrl,
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
@@ -51,7 +54,7 @@ class AnimeMangaCard extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      title,
+                      item.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,

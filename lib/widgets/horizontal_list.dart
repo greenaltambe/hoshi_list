@@ -50,10 +50,7 @@ class HorizontalList extends StatelessWidget {
           child: ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             itemCount: 4,
-            itemBuilder: (context, index) => AnimeMangaCard(
-              imageUrl: items[index].imageUrl,
-              title: items[index].title,
-            ),
+            itemBuilder: (context, index) => AnimeMangaCard(item: items[index]),
             scrollDirection: Axis.horizontal,
           ),
         ),

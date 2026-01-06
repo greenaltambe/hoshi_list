@@ -21,9 +21,7 @@ class AnimeMangaGrid extends StatelessWidget {
           itemCount: items.length,
           itemBuilder: (context, index) {
             final item = items[index];
-            return SizedBox(
-              child: AnimeMangaCard(imageUrl: item.imageUrl, title: item.title),
-            );
+            return SizedBox(child: AnimeMangaCard(item: item));
           },
         ),
       ),
