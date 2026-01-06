@@ -1,6 +1,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hoshi_list/screens/tabs.dart';
 import 'package:hoshi_list/theme/app_theme.dart';
 import 'package:hoshi_list/theme/color_schemes.dart';
 
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
             darkTheme,
           ), // builds the dark theme from app_theme.dart
           themeMode: ThemeMode.system,
-          home: const Scaffold(body: Center(child: Text('Hello, Hoshi List!'))),
+          home: const TabsScreen(),
         );
       },
     );
