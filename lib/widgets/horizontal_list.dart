@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hoshi_list/model/anime.dart';
+import 'package:hoshi_list/screens/anime_manga_grid.dart';
 import 'package:hoshi_list/widgets/anime_manga_card.dart';
 
 class HorizontalList extends StatelessWidget {
@@ -22,8 +23,13 @@ class HorizontalList extends StatelessWidget {
               splashFactory: InkRipple.splashFactory,
               borderRadius: BorderRadius.circular(8),
               onTap: () {
-                // TODO: Add navigation to detailed list page
-                // Handle "more" tap
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) =>
+                        AnimeMangaGrid(items: items, title: title),
+                  ),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
