@@ -7,9 +7,7 @@ TextTheme buildTextTheme(Brightness brightness) {
       ? ThemeData.light().textTheme
       : ThemeData.dark().textTheme;
 
-  return GoogleFonts.notoSansTextTheme(baseTextTheme).copyWith(
-    titleLarge: TextStyle(fontWeight: FontWeight.bold),
-    titleMedium: TextStyle(fontWeight: FontWeight.w600),
-    titleSmall: TextStyle(fontWeight: FontWeight.w500),
+  return GoogleFonts.notoSansTextTheme(
+    baseTextTheme,
   ); // Using Noto Sans font and passing base text theme with current brightness
 }
