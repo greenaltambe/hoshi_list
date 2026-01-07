@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/features/browse/widgets/horizontal_list.dart';
+import 'package:hoshi_list/features/media/widgets/horizontal_list.dart';
 import 'package:hoshi_list/data/dummy_manga.dart';
 
 class MangaBrowseScreen extends StatelessWidget {
