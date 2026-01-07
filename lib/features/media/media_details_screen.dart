@@ -26,7 +26,7 @@ class MediaDetailsScreen extends ConsumerWidget {
               description: mediaDetails.description,
             ), // Returns as column
             SizedBox(height: 16),
-            TabbedMediaDetails(),
+            TabbedMediaDetails(mediaDetails: mediaDetails),
           ],
         ),
       ),

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hoshi_list/features/media/widgets/tabs/overview_tab.dart';
+import 'package:hoshi_list/models/media.dart';
 
 class TabbedMediaDetails extends StatelessWidget {
-  const TabbedMediaDetails({super.key});
+  const TabbedMediaDetails({super.key, required this.mediaDetails});
+
+  final MediaDetails mediaDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +28,11 @@ class TabbedMediaDetails extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(
+          SizedBox(
             height: 400, // Fixed height for demonstration
             child: TabBarView(
               children: [
-                Center(child: Text('Overview Content')),
+                OverviewTab(mediaDetails: mediaDetails),
                 Center(child: Text('Characters Content')),
                 Center(child: Text('Staff Content')),
                 Center(child: Text('Stats Content')),
