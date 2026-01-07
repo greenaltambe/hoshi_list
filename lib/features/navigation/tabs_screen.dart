@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/features/browse/browse_screen.dart';
 import 'package:hoshi_list/features/home/home_screen.dart';
+import 'package:hoshi_list/features/browse/browse_screen.dart';
 import 'package:hoshi_list/features/mylist/list_screen.dart';
 import 'package:hoshi_list/features/profile/profile_screen.dart';
 
@@ -33,14 +33,6 @@ class _TabsScreenState extends State<TabsScreen> {
       child: isSelected ? selectedIcon : unselectedIcon,
     );
   }
-
-  // Mapping of page identifiers to their respective screen widgets
-  final Map<String, Widget> _pages = {
-    'Home': HomeScreen(),
-    'Browse': BrowseScreen(),
-    'List': ListScreen(),
-    'Profiles': ProfileScreen(),
-  };
 
   final List<Map<String, Map<String, dynamic>>> _tabScreens = [
     {
@@ -82,11 +74,11 @@ class _TabsScreenState extends State<TabsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _pages.keys.elementAt(_selectedIndex),
+          _tabScreens[_selectedIndex].keys.first,
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-      body: _pages.values.elementAt(_selectedIndex),
+      body: _tabScreens[_selectedIndex].values.first['screen'],
       bottomNavigationBar: NavigationBar(
         destinations: _tabScreens.map((tab) {
           String title = tab.keys.first;

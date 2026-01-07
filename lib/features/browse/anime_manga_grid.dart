@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/features/home/widgets/anime_manga_card.dart';
+import 'package:hoshi_list/features/browse/widgets/anime_manga_card.dart';
 
 class AnimeMangaGrid extends StatelessWidget {
   const AnimeMangaGrid({super.key, required this.items, required this.title});

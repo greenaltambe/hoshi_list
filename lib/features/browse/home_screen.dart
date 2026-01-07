@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hoshi_list/features/browse/anime_tab.dart';
 import 'package:hoshi_list/features/browse/manga_tab.dart';
 
-class BrowseScreen extends StatelessWidget {
-  const BrowseScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
