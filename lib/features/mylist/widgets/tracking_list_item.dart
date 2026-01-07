@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hoshi_list/features/media/media_details_screen.dart';
 import 'package:hoshi_list/features/media/providers/media_details_provider.dart';
 import 'package:hoshi_list/models/tracked_media.dart';
 
@@ -11,10 +12,20 @@ class TrackingListItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mediaDetails = ref.watch(mediaDetailsProvider(trackedMedia.mediaId));
-    return Card(
-      color: Theme.of(context).colorScheme.surfaceContainer,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
+    return InkWell(
+      splashFactory: InkRipple.splashFactory,
+      borderRadius: BorderRadius.circular(16),
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) =>
+                MediaDetailsScreen.fromId(mediaId: mediaDetails.id),
+          ),
+        );
+      },
+      child: Card(
+        color: Theme.of(context).colorScheme.surfaceContainer,
+        clipBehavior: Clip.hardEdge,
         child: SizedBox(
           height: 150,
           child: Row(

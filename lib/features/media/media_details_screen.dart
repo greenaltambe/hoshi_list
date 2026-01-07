@@ -7,13 +7,17 @@ import 'package:hoshi_list/features/media/widgets/media_description.dart';
 import 'package:hoshi_list/features/media/widgets/tabbed_media_details.dart';
 
 class MediaDetailsScreen extends ConsumerWidget {
-  const MediaDetailsScreen({super.key, required this.item});
+  const MediaDetailsScreen({super.key, this.item, this.mediaId});
 
-  final Media item;
+  const MediaDetailsScreen.fromId({super.key, required this.mediaId})
+    : item = null;
+
+  final Media? item;
+  final int? mediaId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mediaDetails = ref.watch(mediaDetailsProvider(item.id));
+    final mediaDetails = ref.watch(mediaDetailsProvider(item?.id ?? mediaId!));
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(elevation: 0, backgroundColor: Colors.transparent),
