@@ -44,23 +44,27 @@ class AnimeMangaCard extends StatelessWidget {
                       horizontal: 4.0,
                     ),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.black.withAlpha(204),
-                          Colors.transparent,
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
+                      // gradient: LinearGradient(
+                      //   colors: [
+                      //     Colors.black.withAlpha(204),
+                      //     Colors.transparent,
+                      //   ],
+                      //   begin: Alignment.bottomCenter,
+                      //   end: Alignment.topCenter,
+                      // ),
+                      color: Theme.of(context).colorScheme.primaryContainer,
                     ),
                     child: Text(
                       item.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                      // style: const TextStyle(
+                      //   color: Colors.white,
+                      //   fontWeight: FontWeight.bold,
+                      // ),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
                       ),
                     ),
                   ),

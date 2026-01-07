@@ -14,7 +14,7 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  int _selectedIndex = 0; // Denotes the current selectd index in bottom nav bar
+  int _selectedIndex = 0; // Denotes the current select index in bottom nav bar
 
   // Method to create an animated icon switcher for navigation destinations
   Widget _animatedIconSwitcher(
@@ -75,10 +75,19 @@ class _TabsScreenState extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(
           _tabScreens[_selectedIndex].keys.first,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            textBaseline: TextBaseline.alphabetic,
+          ),
         ),
+        scrolledUnderElevation: 0,
       ),
-      body: _tabScreens[_selectedIndex].values.first['screen'],
+
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _tabScreens
+            .map((tab) => tab.values.first['screen'] as Widget)
+            .toList(),
+      ),
       bottomNavigationBar: NavigationBar(
         destinations: _tabScreens.map((tab) {
           String title = tab.keys.first;

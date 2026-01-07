@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/features/home/providers/activity_provider.dart';
-import 'package:hoshi_list/features/media/providers/media_details_provider.dart';
 
 class ActivityList extends ConsumerWidget {
   const ActivityList({super.key, required this.activityFeedType});
