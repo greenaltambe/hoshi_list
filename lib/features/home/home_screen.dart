@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/screens/home/anime.dart';
-import 'package:hoshi_list/screens/home/manga.dart';
+import 'package:hoshi_list/features/home/anime_tab.dart';
+import 'package:hoshi_list/features/home/manga_tab.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

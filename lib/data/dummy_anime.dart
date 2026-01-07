@@ -1,4 +1,4 @@
-import 'package:hoshi_list/model/media.dart';
+import 'package:hoshi_list/models/media.dart';
 
 final dummyAnimeList = [
   Media(
@@ -37,4 +37,60 @@ final dummyAnimeList = [
     imageUrl: 'https://picsum.photos/200/300?7',
   ),
   Media(id: 8, title: 'One Piece', imageUrl: 'https://picsum.photos/200/300?8'),
+  Media(
+    id: 9,
+    title: 'Hunter x Hunter',
+    imageUrl: 'https://picsum.photos/200/300?9',
+  ),
+  Media(id: 10, title: 'Bleach', imageUrl: 'https://picsum.photos/200/300?10'),
+  Media(
+    id: 11,
+    title: 'Code Geass: Lelouch of the Rebellion',
+    imageUrl: 'https://picsum.photos/200/300?11',
+  ),
+  Media(
+    id: 12,
+    title: 'Tokyo Ghoul',
+    imageUrl: 'https://picsum.photos/200/300?12',
+  ),
+  Media(
+    id: 13,
+    title: 'Mob Psycho 100',
+    imageUrl: 'https://picsum.photos/200/300?13',
+  ),
+  Media(
+    id: 14,
+    title: 'My Hero Academia',
+    imageUrl: 'https://picsum.photos/200/300?14',
+  ),
+  Media(
+    id: 15,
+    title: 'Vinland Saga',
+    imageUrl: 'https://picsum.photos/200/300?15',
+  ),
+  Media(
+    id: 16,
+    title: 'Cowboy Bebop',
+    imageUrl: 'https://picsum.photos/200/300?16',
+  ),
+  Media(
+    id: 17,
+    title: 'Neon Genesis Evangelion',
+    imageUrl: 'https://picsum.photos/200/300?17',
+  ),
+  Media(
+    id: 18,
+    title: 'Chainsaw Man',
+    imageUrl: 'https://picsum.photos/200/300?18',
+  ),
+  Media(
+    id: 19,
+    title: 'Haikyuu!!',
+    imageUrl: 'https://picsum.photos/200/300?19',
+  ),
+  Media(
+    id: 20,
+    title: 'Spy x Family',
+    imageUrl: 'https://picsum.photos/200/300?20',
+  ),
 ];

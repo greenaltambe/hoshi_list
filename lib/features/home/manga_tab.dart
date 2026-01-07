@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/widgets/horizontal_list.dart';
+import 'package:hoshi_list/features/home/widgets/horizontal_list.dart';
 import 'package:hoshi_list/data/dummy_manga.dart';
 
 class MangaHomeScreen extends StatelessWidget {

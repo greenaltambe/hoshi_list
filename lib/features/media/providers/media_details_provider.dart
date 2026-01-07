@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/data/dummy_anime_details.dart';
-import 'package:hoshi_list/model/media.dart';
+import 'package:hoshi_list/models/media.dart';
 
 final mediaDetailsProvider = Provider.family<MediaDetails, int>((ref, mediaId) {
   final mediaDetails = dummyMediaDetails[mediaId];

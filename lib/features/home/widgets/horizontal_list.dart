@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/model/media.dart';
-import 'package:hoshi_list/screens/anime_manga_grid.dart';
-import 'package:hoshi_list/widgets/anime_manga_card.dart';
+import 'package:hoshi_list/models/media.dart';
+import 'package:hoshi_list/features/home/anime_manga_grid.dart';
+import 'package:hoshi_list/features/home/widgets/anime_manga_card.dart';
 
 class HorizontalList extends StatelessWidget {
   const HorizontalList({super.key, required this.items, required this.title});

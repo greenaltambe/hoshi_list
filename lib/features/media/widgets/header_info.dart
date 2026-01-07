@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/model/media.dart';
+import 'package:hoshi_list/models/media.dart';
 
 // Top section with cover image, poster, and title widget
 class HeaderInfoSection extends StatelessWidget {

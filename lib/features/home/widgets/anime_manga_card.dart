@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/model/media.dart';
-import 'package:hoshi_list/screens/media_details.dart';
+import 'package:hoshi_list/models/media.dart';
+import 'package:hoshi_list/features/media/media_details_screen.dart';
 
 class AnimeMangaCard extends StatelessWidget {
   const AnimeMangaCard({super.key, required this.item});

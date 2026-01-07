@@ -1,4 +1,4 @@
-import 'package:hoshi_list/model/media.dart';
+import 'package:hoshi_list/models/media.dart';
 
 final dummyMangaList = [
   Media(

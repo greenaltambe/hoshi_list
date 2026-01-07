@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hoshi_list/model/media.dart';
-import 'package:hoshi_list/providers/media_details_provider.dart';
-import 'package:hoshi_list/widgets/media_details/header_info.dart';
-import 'package:hoshi_list/widgets/media_details/media_description.dart';
-import 'package:hoshi_list/widgets/media_details/tabbed_media_details.dart';
+import 'package:hoshi_list/models/media.dart';
+import 'package:hoshi_list/features/media/providers/media_details_provider.dart';
+import 'package:hoshi_list/features/media/widgets/header_info.dart';
+import 'package:hoshi_list/features/media/widgets/media_description.dart';
+import 'package:hoshi_list/features/media/widgets/tabbed_media_details.dart';
 
 class MediaDetailsScreen extends ConsumerWidget {
   const MediaDetailsScreen({super.key, required this.item});

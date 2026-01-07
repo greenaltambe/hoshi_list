@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/screens/browse.dart';
-import 'package:hoshi_list/screens/home.dart';
-import 'package:hoshi_list/screens/list.dart';
-import 'package:hoshi_list/screens/profile.dart';
+import 'package:hoshi_list/features/browse/browse_screen.dart';
+import 'package:hoshi_list/features/home/home_screen.dart';
+import 'package:hoshi_list/features/mylist/list_screen.dart';
+import 'package:hoshi_list/features/profile/profile_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
