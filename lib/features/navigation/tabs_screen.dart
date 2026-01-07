@@ -42,6 +42,41 @@ class _TabsScreenState extends State<TabsScreen> {
     'Profiles': ProfileScreen(),
   };
 
+  final List<Map<String, Map<String, dynamic>>> _tabScreens = [
+    {
+      'Home': {
+        'screen': HomeScreen(),
+        'selectedIcon': Icons.home,
+        'unselectedIcon': Icons.home_outlined,
+        'index': 0,
+      },
+    },
+    {
+      'Browse': {
+        'screen': BrowseScreen(),
+        'selectedIcon': Icons.search,
+        'unselectedIcon': Icons.search_outlined,
+        'index': 1,
+      },
+    },
+    {
+      'List': {
+        'screen': ListScreen(),
+        'selectedIcon': Icons.list,
+        'unselectedIcon': Icons.list_alt,
+        'index': 2,
+      },
+    },
+    {
+      'Profiles': {
+        'screen': ProfileScreen(),
+        'selectedIcon': Icons.person,
+        'unselectedIcon': Icons.person_outline,
+        'index': 3,
+      },
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,60 +88,22 @@ class _TabsScreenState extends State<TabsScreen> {
       ),
       body: _pages.values.elementAt(_selectedIndex),
       bottomNavigationBar: NavigationBar(
-        destinations: [
-          NavigationDestination(
+        destinations: _tabScreens.map((tab) {
+          String title = tab.keys.first;
+          var details = tab[title]!;
+
+          return NavigationDestination(
             icon: _animatedIconSwitcher(
-              Icon(Icons.home, key: ValueKey('selected')),
-              Icon(Icons.home_outlined, key: ValueKey('unselected')),
-              _selectedIndex == 0,
+              Icon(details['selectedIcon'], key: ValueKey('selected_$title')),
+              Icon(
+                details['unselectedIcon'],
+                key: ValueKey('unselected_$title'),
+              ),
+              details['index'] == _selectedIndex,
             ),
-            selectedIcon: _animatedIconSwitcher(
-              Icon(Icons.home, key: ValueKey('selected')),
-              Icon(Icons.home_outlined, key: ValueKey('unselected')),
-              _selectedIndex == 0,
-            ),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: _animatedIconSwitcher(
-              Icon(Icons.search, key: ValueKey('selected')),
-              Icon(Icons.search_outlined, key: ValueKey('unselected')),
-              _selectedIndex == 1,
-            ),
-            selectedIcon: _animatedIconSwitcher(
-              Icon(Icons.search, key: ValueKey('selected')),
-              Icon(Icons.search_outlined, key: ValueKey('unselected')),
-              _selectedIndex == 1,
-            ),
-            label: 'Browse',
-          ),
-          NavigationDestination(
-            icon: _animatedIconSwitcher(
-              Icon(Icons.list, key: ValueKey('selected')),
-              Icon(Icons.list_alt, key: ValueKey('unselected')),
-              _selectedIndex == 2,
-            ),
-            selectedIcon: _animatedIconSwitcher(
-              Icon(Icons.list, key: ValueKey('selected')),
-              Icon(Icons.list_alt, key: ValueKey('unselected')),
-              _selectedIndex == 2,
-            ),
-            label: 'List',
-          ),
-          NavigationDestination(
-            icon: _animatedIconSwitcher(
-              Icon(Icons.person, key: ValueKey('selected')),
-              Icon(Icons.person_outline, key: ValueKey('unselected')),
-              _selectedIndex == 3,
-            ),
-            selectedIcon: _animatedIconSwitcher(
-              Icon(Icons.person, key: ValueKey('selected')),
-              Icon(Icons.person_outline, key: ValueKey('unselected')),
-              _selectedIndex == 3,
-            ),
-            label: 'Profile',
-          ),
-        ],
+            label: title,
+          );
+        }).toList(),
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) {
           setState(() {
