@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hoshi_list/features/media/widgets/horizontal_media_list/horizontal_media_list.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/horizontal_media_list.dart';
 import 'package:hoshi_list/features/home/providers/media_in_progress_provider.dart';
 import 'package:hoshi_list/features/home/widgets/activity.dart';
 

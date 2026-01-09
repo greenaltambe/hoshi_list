@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/features/browse/anime_tab.dart';
-import 'package:hoshi_list/features/browse/manga_tab.dart';
+import 'package:hoshi_list/features/browse/widgets/tabs/anime_tab.dart';
+import 'package:hoshi_list/features/browse/widgets/tabs/manga_tab.dart';
 
 class BrowseScreen extends StatelessWidget {
   const BrowseScreen({super.key});

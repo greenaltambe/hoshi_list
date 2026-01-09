@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/features/browse/providers/trending_media_provider.dart';
-import 'package:hoshi_list/features/media/widgets/horizontal_media_list/error_horizontal_media_list.dart';
-import 'package:hoshi_list/features/media/widgets/horizontal_media_list/horizontal_media_list.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/error_horizontal_media_list.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/horizontal_media_list.dart';
 import 'package:hoshi_list/data/dummy_anime.dart';
-import 'package:hoshi_list/features/media/widgets/horizontal_media_list/loading_horizontal_media_list.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/loading_horizontal_media_list.dart';
 import 'package:hoshi_list/models/tracked_media.dart';
 
 class AnimeBrowseScreen extends ConsumerWidget {

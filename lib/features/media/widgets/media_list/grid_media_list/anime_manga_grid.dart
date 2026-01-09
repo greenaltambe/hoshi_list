@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/features/browse/widgets/anime_manga_card.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/media_list_card.dart';
 
 class AnimeMangaGrid extends StatelessWidget {
   const AnimeMangaGrid({super.key, required this.items, required this.title});
@@ -21,7 +21,7 @@ class AnimeMangaGrid extends StatelessWidget {
           itemCount: items.length,
           itemBuilder: (context, index) {
             final item = items[index];
-            return SizedBox(child: AnimeMangaCard(item: item));
+            return SizedBox(child: MediaListCard(item: item));
           },
         ),
       ),

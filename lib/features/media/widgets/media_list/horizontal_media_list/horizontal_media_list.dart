@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hoshi_list/models/media.dart';
-import 'package:hoshi_list/features/browse/anime_manga_grid.dart';
-import 'package:hoshi_list/features/browse/widgets/anime_manga_card.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/grid_media_list/anime_manga_grid.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/media_list_card.dart';
 
 class HorizontalMediaList extends StatelessWidget {
   const HorizontalMediaList({
@@ -66,7 +66,7 @@ class HorizontalMediaList extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               itemCount: 6,
               itemBuilder: (context, index) =>
-                  AnimeMangaCard(item: items[index]),
+                  MediaListCard(item: items[index]),
               scrollDirection: Axis.horizontal,
             ),
           ),
