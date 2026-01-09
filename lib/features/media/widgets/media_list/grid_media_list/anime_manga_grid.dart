@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/features/browse/providers/media_list_provider.dart';
 import 'package:hoshi_list/features/media/widgets/media_list/media_list_card.dart';
-import 'package:hoshi_list/models/media_query.dart';
+import 'package:hoshi_list/models/media_list_query.dart';
 
 class AnimeMangaGrid extends ConsumerWidget {
   const AnimeMangaGrid({super.key, required this.query, required this.title});

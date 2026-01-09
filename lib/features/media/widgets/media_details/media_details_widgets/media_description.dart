@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class MediaDescription extends StatefulWidget {
   const MediaDescription({super.key, required this.description});
@@ -19,16 +20,15 @@ class _MediaDescriptionState extends State<MediaDescription> {
       child: Column(
         children: [
           AnimatedCrossFade(
-            firstChild: Text(
-              widget.description,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+            firstChild: SizedBox(
+              height: 40,
+              child: Html(data: widget.description, shrinkWrap: true),
             ),
-            secondChild: Text(widget.description),
+            secondChild: Html(data: widget.description),
             crossFadeState: _isExpanded
                 ? CrossFadeState.showSecond
                 : CrossFadeState.showFirst,
-            duration: const Duration(milliseconds: 100),
+            duration: const Duration(milliseconds: 200),
             alignment: Alignment.topLeft,
           ),
           IconButton(

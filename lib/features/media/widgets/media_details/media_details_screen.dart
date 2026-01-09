@@ -18,20 +18,27 @@ class MediaDetailsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mediaDetails = ref.watch(mediaDetailsProvider(item?.id ?? mediaId!));
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(elevation: 0, backgroundColor: Colors.transparent),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            HeaderInfoSection(mediaDetails: mediaDetails),
-            SizedBox(height: 16),
-            MediaDescription(
-              description: mediaDetails.description,
-            ), // Returns as column
-            SizedBox(height: 16),
-            TabbedMediaDetails(mediaDetails: mediaDetails),
-          ],
+        child: mediaDetails.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (error, stack) => Center(child: Text('Error: $error')),
+          data: (mediaDetails) {
+            return Column(
+              children: [
+                HeaderInfoSection(mediaDetails: mediaDetails),
+                SizedBox(height: 16),
+                MediaDescription(
+                  description: mediaDetails.description,
+                ), // Returns as column
+                SizedBox(height: 16),
+                TabbedMediaDetails(mediaDetails: mediaDetails),
+              ],
+            );
+          },
         ),
       ),
     );

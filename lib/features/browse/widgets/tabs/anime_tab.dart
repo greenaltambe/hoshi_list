@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/horizontal_media_list.dart';
-import 'package:hoshi_list/models/media_query.dart';
+import 'package:hoshi_list/models/media_list_query.dart';
 
 class AnimeBrowseScreen extends StatelessWidget {
   const AnimeBrowseScreen({super.key});

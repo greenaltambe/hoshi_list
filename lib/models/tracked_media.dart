@@ -1,4 +1,4 @@
-import 'package:hoshi_list/models/media_query.dart';
+import 'package:hoshi_list/models/media_list_query.dart';
 
 enum TrackStatus { planned, inProgress, completed, onHold }
 

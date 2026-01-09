@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:hoshi_list/models/media_query.dart';
+import 'package:hoshi_list/models/media_list_query.dart';
+import 'package:hoshi_list/services/anilist/queries/media_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_list_query_string.dart';
 import 'package:http/http.dart' as http;
 
@@ -47,5 +48,10 @@ class AnilistClient {
   Future<http.Response> fetchMedia(MediaQueryAL mediaQuery) async {
     final variables = _queryVariableBuilder(mediaQuery);
     return _performQuery(mediaQueryString, variables);
+  }
+
+  Future<http.Response> fetchMediaDetails(int mediaId) async {
+    final variables = {"id": mediaId};
+    return _performQuery(mediaDetailsQueryString, variables);
   }
 }

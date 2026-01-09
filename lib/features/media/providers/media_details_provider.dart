@@ -1,11 +1,19 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hoshi_list/data/dummy_anime_details.dart';
-import 'package:hoshi_list/models/media.dart';
+import 'dart:convert';
 
-final mediaDetailsProvider = Provider.family<MediaDetails, int>((ref, mediaId) {
-  final mediaDetails = dummyMediaDetails[mediaId];
-  if (mediaDetails == null) {
-    throw Exception('Media details not found for id: $mediaId');
-  }
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hoshi_list/models/media.dart';
+import 'package:hoshi_list/services/anilist/anilist_client.dart';
+import 'package:hoshi_list/services/anilist/mappers/media_details_mapper.dart';
+
+final alClient = AnilistClient();
+final mediaDetailsMapper = MediaDetailsMapper();
+
+final mediaDetailsProvider = FutureProvider.family<MediaDetails, int>((
+  ref,
+  mediaId,
+) async {
+  final response = await alClient.fetchMediaDetails(mediaId);
+  final decodedBody = jsonDecode(response.body);
+  final mediaDetails = mediaDetailsMapper.fromJson(decodedBody);
   return mediaDetails;
 });

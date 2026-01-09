@@ -44,7 +44,7 @@ class HeaderInfoSection extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.network(
-                  mediaDetails.imageUrl,
+                  mediaDetails.coverImageUrl,
                   height: 160,
                   fit: BoxFit.cover,
                 ),
@@ -55,7 +55,7 @@ class HeaderInfoSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      mediaDetails.title,
+                      mediaDetails.romajiTitle,
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontSize: 20,
                         color: Theme.of(context).colorScheme.onSurface,
