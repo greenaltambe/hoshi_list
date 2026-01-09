@@ -3,8 +3,12 @@ import 'package:hoshi_list/models/media.dart';
 import 'package:hoshi_list/features/browse/anime_manga_grid.dart';
 import 'package:hoshi_list/features/browse/widgets/anime_manga_card.dart';
 
-class HorizontalList extends StatelessWidget {
-  const HorizontalList({super.key, required this.items, required this.title});
+class HorizontalMediaList extends StatelessWidget {
+  const HorizontalMediaList({
+    super.key,
+    required this.items,
+    required this.title,
+  });
 
   final List<Media> items;
   final String title;
@@ -45,15 +49,27 @@ class HorizontalList extends StatelessWidget {
           ),
         ),
 
-        SizedBox(
-          height: 180,
-          child: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            itemCount: 4,
-            itemBuilder: (context, index) => AnimeMangaCard(item: items[index]),
-            scrollDirection: Axis.horizontal,
+        if (items.isEmpty)
+          SizedBox(
+            height: 180,
+            child: Center(
+              child: Text(
+                'No items to display.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+          )
+        else
+          SizedBox(
+            height: 180,
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              itemCount: 6,
+              itemBuilder: (context, index) =>
+                  AnimeMangaCard(item: items[index]),
+              scrollDirection: Axis.horizontal,
+            ),
           ),
-        ),
       ],
     );
   }
