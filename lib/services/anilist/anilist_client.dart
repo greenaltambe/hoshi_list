@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:hoshi_list/models/media_character.dart';
 import 'package:hoshi_list/models/media_list_query.dart';
+import 'package:hoshi_list/services/anilist/queries/characters_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_list_query_string.dart';
 import 'package:http/http.dart' as http;
@@ -22,7 +24,7 @@ class AnilistClient {
         body: jsonEncode({"query": query, "variables": variables}),
       );
 
-      print('response: ${response.body}');
+      print(response.body);
 
       return response;
     } catch (e) {
@@ -53,5 +55,21 @@ class AnilistClient {
   Future<http.Response> fetchMediaDetails(int mediaId) async {
     final variables = {"id": mediaId};
     return _performQuery(mediaDetailsQueryString, variables);
+  }
+
+  // Additional methods for other queries can be added here
+  Future<http.Response> fetchMediaCharacters(
+    MediaCharacterQueryAL mediaCharacterQuery,
+  ) async {
+    final variables = {
+      "mediaId": mediaCharacterQuery.mediaId,
+      "page": mediaCharacterQuery.page,
+      "perPage": mediaCharacterQuery.perPage,
+      "sort": mediaCharacterQuery.sort
+          .map((e) => e.name.toUpperCase().replaceAll('DESC', '_DESC'))
+          .toList(),
+    };
+
+    return _performQuery(charactersListQueryString, variables);
   }
 }

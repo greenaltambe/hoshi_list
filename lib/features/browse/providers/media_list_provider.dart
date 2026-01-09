@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/models/media.dart';
 import 'package:hoshi_list/models/media_list_query.dart';
 import 'package:hoshi_list/services/anilist/anilist_client.dart';
-import 'package:hoshi_list/services/anilist/mappers/media_mapper.dart';
+import 'package:hoshi_list/services/anilist/mappers/media_list_mapper.dart';
 
 final alClient = AnilistClient();
 final mediaMapper = MediaMapper();

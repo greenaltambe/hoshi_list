@@ -25,8 +25,8 @@ class HeaderInfoSection extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
+                  Theme.of(context).colorScheme.surface.withAlpha(0),
                   Theme.of(context).colorScheme.surface.withAlpha(150),
-                  Theme.of(context).colorScheme.surface.withAlpha(200),
                   Theme.of(context).colorScheme.surface.withAlpha(255),
                   Theme.of(context).colorScheme.surface,
                 ],
