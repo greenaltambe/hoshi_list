@@ -1,10 +1,10 @@
-enum MediaType { anime, manga }
+import 'package:hoshi_list/models/media_query.dart';
 
 enum TrackStatus { planned, inProgress, completed, onHold }
 
 class TrackedMedia {
   final int mediaId; // links to Media
-  final MediaType type;
+  final MediaTypeAL type;
   final TrackStatus status;
 
   final int progress; // episodes watched / chapters read

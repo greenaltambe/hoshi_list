@@ -1,12 +1,16 @@
 import 'dart:convert';
 
-import 'package:hoshi_list/services/anilist/queries/trending.dart';
+import 'package:hoshi_list/models/media_query.dart';
+import 'package:hoshi_list/services/anilist/queries/media_list_query_string.dart';
 import 'package:http/http.dart' as http;
 
 class AnilistClient {
   String baseUrl = "https://graphql.anilist.co";
 
-  Future<http.Response> _performQuery(String query) async {
+  Future<http.Response> _performQuery(
+    String query,
+    Map<String, dynamic> variables,
+  ) async {
     try {
       final response = await http.post(
         Uri.parse(baseUrl),
@@ -14,8 +18,10 @@ class AnilistClient {
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
-        body: jsonEncode({"query": query}),
+        body: jsonEncode({"query": query, "variables": variables}),
       );
+
+      print('response: ${response.body}');
 
       return response;
     } catch (e) {
@@ -23,13 +29,23 @@ class AnilistClient {
     }
   }
 
-  Future<http.Response> fetchTrendingAnime() async {
-    final query = trendingAnimeQuery;
-    return await _performQuery(query);
+  // Helper to build query variables from MediaQueryAL
+  Map<String, dynamic> _queryVariableBuilder(MediaQueryAL mediaQuery) {
+    final variables = {
+      "page": mediaQuery.page.toInt(),
+      "perPage": mediaQuery.perPage.toInt(),
+      "type": mediaQuery.type.name.toUpperCase(),
+      "sort": !mediaQuery.sort.name.toLowerCase().contains('desc')
+          ? mediaQuery.sort.name.toUpperCase()
+          : mediaQuery.sort.name.toUpperCase().replaceAll('DESC', '_DESC'),
+    };
+
+    return variables;
   }
 
-  Future<http.Response> fetchTrendingManga() async {
-    final query = trendingMangaQuery;
-    return await _performQuery(query);
+  // The public method to fetch media based on MediaQueryAL
+  Future<http.Response> fetchMedia(MediaQueryAL mediaQuery) async {
+    final variables = _queryVariableBuilder(mediaQuery);
+    return _performQuery(mediaQueryString, variables);
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/features/mylist/providers/filtered_list_media_provider.dart';
 import 'package:hoshi_list/features/mylist/widgets/tracking_list_item.dart';
+import 'package:hoshi_list/models/media_query.dart';
 import 'package:hoshi_list/models/tracked_media.dart';
 
 class TrackingList extends ConsumerWidget {
@@ -11,7 +12,7 @@ class TrackingList extends ConsumerWidget {
     required this.status,
   });
 
-  final MediaType mediaType;
+  final MediaTypeAL mediaType;
   final TrackStatus status;
 
   @override

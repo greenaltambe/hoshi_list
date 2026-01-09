@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hoshi_list/features/browse/providers/trending_media_provider.dart';
-import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/error_horizontal_media_list.dart';
 import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/horizontal_media_list.dart';
-import 'package:hoshi_list/data/dummy_manga.dart';
-import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/loading_horizontal_media_list.dart';
-import 'package:hoshi_list/models/tracked_media.dart';
+import 'package:hoshi_list/models/media_query.dart';
 
-class MangaBrowseScreen extends ConsumerWidget {
+class MangaBrowseScreen extends StatelessWidget {
   const MangaBrowseScreen({super.key});
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final trendingManga = ref.watch(trendingMediaProvider(MediaType.manga));
+  final _trendingQuery = const MediaQueryAL(
+    type: MediaTypeAL.manga,
+    sort: MediaSort.trendingDesc,
+  );
+  final _popularQuery = const MediaQueryAL(
+    type: MediaTypeAL.manga,
+    sort: MediaSort.popularityDesc,
+  );
+  final _topRatedQuery = const MediaQueryAL(
+    type: MediaTypeAL.manga,
+    sort: MediaSort.scoreDesc,
+  );
 
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
         child: Column(
           children: [
-            trendingManga.when(
-              loading: () => LoadingHorizontalMediaList(),
-              error: (e, st) => ErrorHorizontalMediaList(),
-              data: (items) =>
-                  HorizontalMediaList(items: items, title: 'Trending Manga'),
-            ),
+            HorizontalMediaList(query: _trendingQuery, title: 'Trending Manga'),
             SizedBox(height: 16),
+            HorizontalMediaList(query: _popularQuery, title: 'Popular Manga'),
             SizedBox(height: 16),
             HorizontalMediaList(
-              items: dummyMangaList,
+              query: _topRatedQuery,
               title: 'Top Rated Manga',
             ),
-            SizedBox(height: 16),
-            HorizontalMediaList(items: dummyMangaList, title: 'New Releases'),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hoshi_list/features/mylist/widgets/tracking_list.dart';
+import 'package:hoshi_list/models/media_query.dart';
 import 'package:hoshi_list/models/tracked_media.dart';
 
 class ListScreen extends StatefulWidget {
@@ -12,7 +13,7 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
-  var _selectedMediaType = MediaType.anime; // Default selection
+  var _selectedMediaType = MediaTypeAL.anime; // Default selection
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +30,17 @@ class _ListScreenState extends State<ListScreen> {
                 ),
               ),
               segments: [
-                ButtonSegment<MediaType>(
-                  value: MediaType.anime,
+                ButtonSegment<MediaTypeAL>(
+                  value: MediaTypeAL.anime,
                   label: Text('Anime'),
                 ),
-                ButtonSegment<MediaType>(
-                  value: MediaType.manga,
+                ButtonSegment<MediaTypeAL>(
+                  value: MediaTypeAL.manga,
                   label: Text('Manga'),
                 ),
               ],
               selected: {_selectedMediaType},
-              onSelectionChanged: (Set<MediaType> newSelection) {
+              onSelectionChanged: (Set<MediaTypeAL> newSelection) {
                 setState(() {
                   // Update the selected media type
                   _selectedMediaType = newSelection.first;

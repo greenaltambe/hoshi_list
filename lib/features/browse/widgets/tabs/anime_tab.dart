@@ -1,33 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hoshi_list/features/browse/providers/trending_media_provider.dart';
-import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/error_horizontal_media_list.dart';
 import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/horizontal_media_list.dart';
-import 'package:hoshi_list/data/dummy_anime.dart';
-import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/loading_horizontal_media_list.dart';
-import 'package:hoshi_list/models/tracked_media.dart';
+import 'package:hoshi_list/models/media_query.dart';
 
-class AnimeBrowseScreen extends ConsumerWidget {
+class AnimeBrowseScreen extends StatelessWidget {
   const AnimeBrowseScreen({super.key});
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final trendingAnime = ref.watch(trendingMediaProvider(MediaType.anime));
+  final _trendingQuery = const MediaQueryAL(
+    type: MediaTypeAL.anime,
+    sort: MediaSort.trendingDesc,
+  );
+  final _popularQuery = const MediaQueryAL(
+    type: MediaTypeAL.anime,
+    sort: MediaSort.popularityDesc,
+  );
+  final _topRatedQuery = const MediaQueryAL(
+    type: MediaTypeAL.anime,
+    sort: MediaSort.scoreDesc,
+  );
 
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
         child: Column(
           children: [
-            trendingAnime.when(
-              loading: () => LoadingHorizontalMediaList(),
-              error: (e, st) => ErrorHorizontalMediaList(),
-              data: (items) =>
-                  HorizontalMediaList(items: items, title: 'Trending anime'),
+            HorizontalMediaList(query: _trendingQuery, title: 'Trending Anime'),
+            SizedBox(height: 16),
+            HorizontalMediaList(query: _popularQuery, title: 'Popular Anime'),
+            SizedBox(height: 16),
+            HorizontalMediaList(
+              query: _topRatedQuery,
+              title: 'Top Rated Anime',
             ),
-            SizedBox(height: 16),
-            HorizontalMediaList(items: dummyAnimeList, title: 'New Releases'),
-            SizedBox(height: 16),
-            HorizontalMediaList(items: dummyAnimeList, title: 'New Releases'),
           ],
         ),
       ),

@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/horizontal_media_list.dart';
 import 'package:hoshi_list/features/home/providers/media_in_progress_provider.dart';
 import 'package:hoshi_list/features/home/widgets/activity.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
+  // TODO: Replace with actual queries for in-progress media
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mediaInProgress = ref.watch(mediaInProgressProvider);
     return SingleChildScrollView(
       child: Column(
         children: [
-          HorizontalMediaList(
-            items: mediaInProgress,
-            title: "Anime In Progress",
-          ),
+          // HorizontalMediaList(
+          //   items: mediaInProgress,
+          //   title: "Anime In Progress",
+          // ),
           SizedBox(height: 16),
-          HorizontalMediaList(
-            items: mediaInProgress,
-            title: "Manga In Progress",
-          ),
+          // HorizontalMediaList(
+          //   items: mediaInProgress,
+          //   title: "Manga In Progress",
+          // ),
           SizedBox(height: 16),
           const ActivityTab(),
         ],

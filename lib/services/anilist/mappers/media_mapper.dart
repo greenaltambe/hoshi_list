@@ -17,7 +17,8 @@ class MediaMapper {
     // Check for expected data structure
     if (decodedData['data'] == null ||
         decodedData['data']['Page'] == null ||
-        decodedData['data']['Page']['media'] == null) {
+        decodedData['data']['Page']['media'] == null ||
+        decodedData['data']['Page']['pageInfo'] == null) {
       throw Exception('Invalid data format from Anilist API');
     }
 

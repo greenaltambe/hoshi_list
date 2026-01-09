@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/models/media.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hoshi_list/features/browse/providers/media_list_provider.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/error_horizontal_media_list.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/loading_horizontal_media_list.dart';
 import 'package:hoshi_list/features/media/widgets/media_list/grid_media_list/anime_manga_grid.dart';
 import 'package:hoshi_list/features/media/widgets/media_list/media_list_card.dart';
+import 'package:hoshi_list/models/media_query.dart';
 
-class HorizontalMediaList extends StatelessWidget {
+class HorizontalMediaList extends ConsumerWidget {
   const HorizontalMediaList({
     super.key,
-    required this.items,
+    required this.query,
     required this.title,
   });
 
-  final List<Media> items;
+  final MediaQueryAL query;
   final String title;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final items = ref.watch(mediaListProvider(query));
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -31,7 +37,7 @@ class HorizontalMediaList extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (ctx) =>
-                        AnimeMangaGrid(items: items, title: title),
+                        AnimeMangaGrid(query: query, title: title),
                   ),
                 );
               },
@@ -49,27 +55,34 @@ class HorizontalMediaList extends StatelessWidget {
           ),
         ),
 
-        if (items.isEmpty)
-          SizedBox(
-            height: 180,
-            child: Center(
-              child: Text(
-                'No items to display.',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ),
-          )
-        else
-          SizedBox(
-            height: 180,
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              itemCount: 6,
-              itemBuilder: (context, index) =>
-                  MediaListCard(item: items[index]),
-              scrollDirection: Axis.horizontal,
-            ),
-          ),
+        items.when(
+          loading: () => LoadingHorizontalMediaList(),
+          error: (error, stackTrace) => ErrorHorizontalMediaList(),
+          data: (items) {
+            if (items.isEmpty) {
+              return SizedBox(
+                height: 180,
+                child: Center(
+                  child: Text(
+                    'No items to display.',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+              );
+            } else {
+              return SizedBox(
+                height: 180,
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  itemCount: 6,
+                  itemBuilder: (context, index) =>
+                      MediaListCard(item: items[index]),
+                  scrollDirection: Axis.horizontal,
+                ),
+              );
+            }
+          },
+        ),
       ],
     );
   }
