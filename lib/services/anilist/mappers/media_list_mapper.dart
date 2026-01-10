@@ -35,7 +35,7 @@ class MediaMapper {
           mediaJson['title']['english'] as String? ??
           mediaJson['title']['romaji'] as String? ??
           'No Title';
-      final imageUrl = mediaJson['coverImage']['medium'] as String;
+      final imageUrl = mediaJson['coverImage']['large'] as String;
       return Media(id: id, title: title, imageUrl: imageUrl);
     }).toList();
   }

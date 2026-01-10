@@ -14,7 +14,7 @@ query ($page: Int, $perPage: Int, $type: MediaType, $sort: [MediaSort]) {
         native
       }
       coverImage {
-        medium
+        large
       }
     }
   }

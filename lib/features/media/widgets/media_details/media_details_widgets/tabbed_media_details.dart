@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hoshi_list/features/media/widgets/media_details/media_detail_tabs/characters_list_tab.dart';
 import 'package:hoshi_list/features/media/widgets/media_details/media_detail_tabs/overview_tab.dart';
+import 'package:hoshi_list/features/media/widgets/media_details/media_detail_tabs/review_list_tab.dart';
 import 'package:hoshi_list/features/media/widgets/media_details/media_detail_tabs/staff_list_tab.dart';
 import 'package:hoshi_list/models/media.dart';
 
@@ -38,7 +39,7 @@ class TabbedMediaDetails extends StatelessWidget {
                 CharactersListTab(mediaId: mediaDetails.id),
                 StaffListTab(mediaId: mediaDetails.id),
                 Center(child: Text('Stats Content')),
-                Center(child: Text('Reviews Content')),
+                ReviewListTab(mediaId: mediaDetails.id),
                 // Add more tabs as needed
               ],
             ),
