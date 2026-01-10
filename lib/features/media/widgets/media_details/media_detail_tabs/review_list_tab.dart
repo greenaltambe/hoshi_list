@@ -53,9 +53,11 @@ class ReviewListTab extends ConsumerWidget {
               ),
             );
           },
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stackTrace) =>
-              Center(child: Text('Error loading reviews: $error')),
+          loading: () =>
+              Expanded(child: const Center(child: CircularProgressIndicator())),
+          error: (error, stackTrace) => Expanded(
+            child: Center(child: Text('Error loading reviews: $error')),
+          ),
         ),
       ],
     );
