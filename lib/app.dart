@@ -18,6 +18,16 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) {
+        if (lightDynamic != null && darkDynamic != null) {
+          lightDynamic = ColorScheme.fromSeed(
+            seedColor: Color(lightDynamic.primary.toARGB32()),
+            brightness: Brightness.light,
+          );
+          darkDynamic = ColorScheme.fromSeed(
+            seedColor: Color(darkDynamic.primary.toARGB32()),
+            brightness: Brightness.dark,
+          );
+        }
         final lightTheme = lightDynamic ?? lightFallbackColorScheme;
         final darkTheme = darkDynamic ?? darkFallbackColorScheme;
 
