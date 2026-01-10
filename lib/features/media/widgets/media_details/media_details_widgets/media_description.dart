@@ -15,44 +15,41 @@ class _MediaDescriptionState extends State<MediaDescription> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        children: [
-          AnimatedCrossFade(
-            firstChild: SizedBox(
-              height: 40,
-              child: Html(data: widget.description, shrinkWrap: true),
-            ),
-            secondChild: Html(data: widget.description),
-            crossFadeState: _isExpanded
-                ? CrossFadeState.showSecond
-                : CrossFadeState.showFirst,
-            duration: const Duration(milliseconds: 200),
-            alignment: Alignment.topLeft,
+    return Column(
+      children: [
+        AnimatedCrossFade(
+          firstChild: SizedBox(
+            height: 40,
+            child: Html(data: widget.description, shrinkWrap: true),
           ),
-          IconButton(
-            icon: _isExpanded
-                ? AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    transitionBuilder: (child, animation) =>
-                        RotationTransition(turns: animation, child: child),
-                    child: Icon(Icons.expand_less),
-                  )
-                : AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    transitionBuilder: (child, animation) =>
-                        RotationTransition(turns: animation, child: child),
-                    child: Icon(Icons.expand_more),
-                  ),
-            onPressed: () {
-              setState(() {
-                _isExpanded = !_isExpanded;
-              });
-            },
-          ),
-        ],
-      ),
+          secondChild: Html(data: widget.description),
+          crossFadeState: _isExpanded
+              ? CrossFadeState.showSecond
+              : CrossFadeState.showFirst,
+          duration: const Duration(milliseconds: 200),
+          alignment: Alignment.topLeft,
+        ),
+        IconButton(
+          icon: _isExpanded
+              ? AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) =>
+                      RotationTransition(turns: animation, child: child),
+                  child: Icon(Icons.expand_less),
+                )
+              : AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) =>
+                      RotationTransition(turns: animation, child: child),
+                  child: Icon(Icons.expand_more),
+                ),
+          onPressed: () {
+            setState(() {
+              _isExpanded = !_isExpanded;
+            });
+          },
+        ),
+      ],
     );
   }
 }

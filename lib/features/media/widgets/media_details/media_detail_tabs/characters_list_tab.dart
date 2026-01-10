@@ -11,6 +11,7 @@ class CharactersListTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final characterList = ref.watch(mediaCharacterListProvider(mediaId));
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Expanded(
           child: characterList.when(
@@ -24,11 +25,16 @@ class CharactersListTab extends ConsumerWidget {
               ),
             ),
             data: (characterList) => ListView.builder(
+              padding: EdgeInsets.zero,
               itemCount: characterList.length,
               itemBuilder: (context, index) {
                 final character = characterList[index];
                 return ListTile(
-                  leading: Image.network(character.imageUrl),
+                  leading: ClipRRect(
+                    clipBehavior: Clip.hardEdge,
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.network(character.imageUrl),
+                  ),
                   title: Text(character.name),
                   subtitle: Text('Role: ${character.role}'),
                 );

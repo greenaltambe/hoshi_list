@@ -30,8 +30,7 @@ class TabbedMediaDetails extends StatelessWidget {
           ),
 
           SizedBox(
-            height:
-                400, // Set a fixed height or use Expanded in a parent widget
+            height: 400,
             child: TabBarView(
               children: [
                 OverviewTab(mediaDetails: mediaDetails),

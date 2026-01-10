@@ -22,24 +22,20 @@ class MediaDetailsScreen extends ConsumerWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(elevation: 0, backgroundColor: Colors.transparent),
-      body: SingleChildScrollView(
-        child: mediaDetails.when(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stack) => Center(child: Text('Error: $error')),
-          data: (mediaDetails) {
-            return Column(
+      body: mediaDetails.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => Center(child: Text('Error: $error')),
+        data: (mediaDetails) {
+          return SingleChildScrollView(
+            child: Column(
               children: [
                 HeaderInfoSection(mediaDetails: mediaDetails),
                 SizedBox(height: 16),
-                MediaDescription(
-                  description: mediaDetails.description,
-                ), // Returns as column
-                SizedBox(height: 16),
                 TabbedMediaDetails(mediaDetails: mediaDetails),
               ],
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
