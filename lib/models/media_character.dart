@@ -9,6 +9,11 @@ class MediaCharacter {
   final int page;
   final int perPage;
 
+  final String? description;
+  final int? favourites;
+
+  final DateTime? dateOfBirth;
+
   final MediaCharacterSort sort;
 
   const MediaCharacter({
@@ -16,6 +21,9 @@ class MediaCharacter {
     required this.name,
     required this.role,
     required this.imageUrl,
+    this.dateOfBirth,
+    this.description,
+    this.favourites,
     this.page = 1,
     this.perPage = 10,
     this.sort = MediaCharacterSort.relevance,

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:hoshi_list/models/media_character.dart';
 import 'package:hoshi_list/models/media_list_query.dart';
+import 'package:hoshi_list/services/anilist/queries/character_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/characters_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_list_query_string.dart';
@@ -71,5 +72,10 @@ class AnilistClient {
     };
 
     return _performQuery(charactersListQueryString, variables);
+  }
+
+  Future<http.Response> fetchMediaCharacterDetails(int mediaCharacterId) async {
+    final variables = {"id": mediaCharacterId};
+    return _performQuery(mediaCharacterDetailsQueryString, variables);
   }
 }
