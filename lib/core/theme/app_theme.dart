@@ -13,5 +13,9 @@ ThemeData buildAppTheme(
           : darkFallbackColorScheme);
 
   final textTheme = buildTextTheme(brightness);
-  return ThemeData(colorScheme: colorScheme, textTheme: textTheme);
+  return ThemeData(
+    useMaterial3: true,
+    colorScheme: colorScheme,
+    textTheme: textTheme,
+  );
 }
