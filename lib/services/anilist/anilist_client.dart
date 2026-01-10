@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'package:hoshi_list/models/media_character.dart';
 import 'package:hoshi_list/models/media_list_query.dart';
+import 'package:hoshi_list/models/staff.dart';
 import 'package:hoshi_list/services/anilist/queries/character_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/characters_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_list_query_string.dart';
+import 'package:hoshi_list/services/anilist/queries/staff_details_query_string.dart';
+import 'package:hoshi_list/services/anilist/queries/staff_list_query_string.dart';
 import 'package:http/http.dart' as http;
 
 class AnilistClient {
@@ -74,8 +77,31 @@ class AnilistClient {
     return _performQuery(charactersListQueryString, variables);
   }
 
+  // Method that fetches media character details
   Future<http.Response> fetchMediaCharacterDetails(int mediaCharacterId) async {
     final variables = {"id": mediaCharacterId};
     return _performQuery(mediaCharacterDetailsQueryString, variables);
+  }
+
+  // Method that fetches media staff list
+  Future<http.Response> fetchMediaStaff(
+    MediaStaffQueryAL mediaStaffQuery,
+  ) async {
+    final variables = {
+      "mediaId": mediaStaffQuery.mediaId,
+      "page": mediaStaffQuery.page,
+      "perPage": mediaStaffQuery.perPage,
+      "sort": mediaStaffQuery.sort
+          .map((e) => e.name.toUpperCase().replaceAll('DESC', '_DESC'))
+          .toList(),
+    };
+
+    return _performQuery(staffListQueryString, variables);
+  }
+
+  // Method that fetches staff details
+  Future<http.Response> fetchMediaStaffDetails(int staffId) async {
+    final variables = {"id": staffId};
+    return _performQuery(staffDetailsQueryString, variables);
   }
 }

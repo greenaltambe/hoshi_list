@@ -1,6 +1,6 @@
-final mediaCharacterDetailsQueryString = '''
+final staffDetailsQueryString = '''
   query (\$id: Int!) {
-    Character (id: \$id){
+    Staff (id: \$id){
       id
       name {
         full
@@ -14,6 +14,11 @@ final mediaCharacterDetailsQueryString = '''
       favourites
       image {
         large
+      }
+      characters {
+        edges {
+          role
+        }
       }
     }
   }

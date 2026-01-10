@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hoshi_list/features/home/providers/media_in_progress_provider.dart';
 import 'package:hoshi_list/features/home/widgets/activity.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -9,7 +8,7 @@ class HomeScreen extends ConsumerWidget {
   // TODO: Replace with actual queries for in-progress media
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mediaInProgress = ref.watch(mediaInProgressProvider);
+    // final mediaInProgress = ref.watch(mediaInProgressProvider);
     return SingleChildScrollView(
       child: Column(
         children: [
