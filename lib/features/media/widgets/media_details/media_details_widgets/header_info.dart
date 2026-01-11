@@ -23,13 +23,20 @@ class HeaderInfoSection extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.network(
-                mediaDetails.bannerImageUrl!,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) =>
-                    Container(color: Colors.grey[900]),
-              ),
-
+              if (mediaDetails.bannerImageUrl != null)
+                Image.network(
+                  mediaDetails.bannerImageUrl!,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Container(color: Colors.grey[900]),
+                ),
+              if (mediaDetails.bannerImageUrl == null)
+                Image.network(
+                  mediaDetails.coverImageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Container(color: Colors.grey[900]),
+                ),
               DecoratedBox(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(

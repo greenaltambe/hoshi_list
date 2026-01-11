@@ -44,9 +44,7 @@ class AnilistClient {
       "page": mediaQuery.page.toInt(),
       "perPage": mediaQuery.perPage.toInt(),
       "type": mediaQuery.type.name.toUpperCase(),
-      "sort": !mediaQuery.sort.name.toLowerCase().contains('desc')
-          ? mediaQuery.sort.name.toUpperCase()
-          : mediaQuery.sort.name.toUpperCase().replaceAll('DESC', '_DESC'),
+      "sort": mediaSortToString[mediaQuery.sort]!['query_name'],
       if (mediaQuery.searchString.isNotEmpty) "search": mediaQuery.searchString,
     };
 
