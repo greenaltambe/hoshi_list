@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/features/mylist/providers/list_media_provider.dart';
-import 'package:hoshi_list/models/media_list_query.dart';
+import 'package:hoshi_list/models/constants/media_type.dart';
 import 'package:hoshi_list/models/tracked_media.dart';
 
 final filteredTrackedMediaProvider =

@@ -1,5 +1,5 @@
-import 'package:hoshi_list/models/media_list_query.dart';
-import 'package:http/http.dart';
+import 'package:hoshi_list/models/constants/media_format.dart';
+import 'package:hoshi_list/models/constants/media_status.dart';
 
 class Media {
   Media({required this.id, required this.title, required this.imageUrl});
@@ -8,22 +8,6 @@ class Media {
   final String title;
   final String imageUrl;
 }
-
-enum MediaFormat {
-  anime,
-  manga,
-  movie,
-  music,
-  novel,
-  ona,
-  oneShot,
-  ova,
-  special,
-  tv,
-  tvShort,
-}
-
-enum MediaStatus { cancelled, finished, hiatus, notYetReleased, releasing }
 
 class MediaDetails {
   final int id;

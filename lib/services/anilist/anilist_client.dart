@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hoshi_list/models/constants/media_sort.dart';
 import 'package:hoshi_list/models/media_character.dart';
 import 'package:hoshi_list/models/media_list_query.dart';
 import 'package:hoshi_list/models/review.dart';
@@ -38,6 +39,14 @@ class AnilistClient {
     }
   }
 
+  int _toFuzzyDate(DateTime date) {
+    return int.parse(
+      '${date.year}'
+      '${date.month.toString().padLeft(2, '0')}'
+      '${date.day.toString().padLeft(2, '0')}',
+    );
+  }
+
   // Helper to build query variables from MediaQueryAL
   Map<String, dynamic> _queryVariableBuilder(MediaQueryAL mediaQuery) {
     final variables = {
@@ -46,6 +55,30 @@ class AnilistClient {
       "type": mediaQuery.type.name.toUpperCase(),
       "sort": mediaSortToString[mediaQuery.sort]!['query_name'],
       if (mediaQuery.searchString.isNotEmpty) "search": mediaQuery.searchString,
+      if (mediaQuery.format != null)
+        "format": mediaQuery.format!.name.toUpperCase(),
+      if (mediaQuery.status != null)
+        "status": mediaQuery.status!.name.toUpperCase(),
+      if (mediaQuery.countryOfOrigin != null)
+        "countryOfOrigin": mediaQuery.countryOfOrigin!.name.toUpperCase(),
+      if (mediaQuery.season != null)
+        "season": mediaQuery.season!.name.toUpperCase(),
+      if (mediaQuery.minimumReleaseYear != null)
+        "minimumReleaseYear": _toFuzzyDate(mediaQuery.minimumReleaseYear!),
+      if (mediaQuery.maximumReleaseYear != null)
+        "maximumReleaseYear": _toFuzzyDate(mediaQuery.maximumReleaseYear!),
+      if (mediaQuery.minimumEpisodes != null)
+        "minimumEpisodes": mediaQuery.minimumEpisodes!,
+      if (mediaQuery.maximumEpisodes != null)
+        "maximumEpisodes": mediaQuery.maximumEpisodes!,
+      if (mediaQuery.minimumChapters != null)
+        "minimumChapters": mediaQuery.minimumChapters!,
+      if (mediaQuery.maximumChapters != null)
+        "maximumChapters": mediaQuery.maximumChapters!,
+      if (mediaQuery.minimumAverageScore != null)
+        "minimumAverageScore": mediaQuery.minimumAverageScore!,
+      if (mediaQuery.maximumAverageScore != null)
+        "maximumAverageScore": mediaQuery.maximumAverageScore!,
     };
 
     return variables;

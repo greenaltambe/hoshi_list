@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/features/browse/providers/media_list_provider.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/grid_media_list/filter_sheet.dart';
 import 'package:hoshi_list/features/media/widgets/media_list/media_list_card.dart';
 import 'package:hoshi_list/models/media_list_query.dart';
 
@@ -15,9 +16,7 @@ class AnimeMangaGrid extends ConsumerStatefulWidget {
 }
 
 class _AnimeMangaGridState extends ConsumerState<AnimeMangaGrid> {
-  final _formKey = GlobalKey<FormState>();
   late MediaQueryAL _currentQuery;
-  MediaSort? _formSortOption;
 
   @override
   void initState() {
@@ -34,26 +33,8 @@ class _AnimeMangaGridState extends ConsumerState<AnimeMangaGrid> {
         title: Text(widget.title),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(34),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    FilterChip(
-                      avatar: Icon(Icons.filter_list),
-                      label: Text('Filters'),
-                      onSelected: (bool selected) {
-                        _showSortOptions(context);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Container(color: Colors.grey[300], height: 1.0),
-            ],
+          child: _AppBarBottom(
+            showSortOptions: () => _showSortOptions(context),
           ),
         ),
       ),
@@ -96,11 +77,10 @@ class _AnimeMangaGridState extends ConsumerState<AnimeMangaGrid> {
     );
   }
 
-  void _showSortOptions(BuildContext context) {
-    showModalBottomSheet(
+  Future<void> _showSortOptions(BuildContext context) async {
+    final newQuery = await showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: true,
-
       useSafeArea: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
@@ -112,87 +92,51 @@ class _AnimeMangaGridState extends ConsumerState<AnimeMangaGrid> {
         minChildSize: 0.4,
         maxChildSize: 0.9,
         builder: (ctx, scrollController) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    Text(
-                      'Sort Options',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Spacer(),
-                    TextButton(
-                      onPressed: () {
-                        _formKey.currentState!.reset();
-                      },
-                      child: Text('Reset'),
-                    ),
-                    FilledButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          _currentQuery = _currentQuery.copyWith(
-                            sort: _formSortOption,
-                            page: 1,
-                          );
-                          setState(() {
-                            ref.read(mediaListProvider(_currentQuery).notifier);
-                          });
-                          Navigator.of(context).pop();
-                        }
-                      },
-                      child: const Text('Filter'),
-                    ),
-                  ],
-                ),
-              ),
-              Container(height: 1, color: Theme.of(context).dividerColor),
-
-              Expanded(
-                child: Form(
-                  key: _formKey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Sort By',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                            Spacer(),
-                            DropdownMenuFormField<MediaSort>(
-                              onSaved: (newValue) => {
-                                _formSortOption = newValue,
-                              },
-                              validator: (value) => value == null
-                                  ? 'Please select a sort option'
-                                  : null,
-                              initialSelection: _currentQuery.sort,
-                              dropdownMenuEntries: mediaSortToString.entries
-                                  .map((entry) {
-                                    return DropdownMenuEntry<MediaSort>(
-                                      value: entry.key,
-                                      label: entry.value["name"]!,
-                                    );
-                                  })
-                                  .toList(),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          return FilterSheet(
+            currentQuery: _currentQuery,
+            scrollController: scrollController,
           );
         },
       ),
+    );
+
+    if (newQuery != null && newQuery != _currentQuery) {
+      setState(() {
+        _currentQuery = newQuery;
+      });
+    }
+  }
+}
+
+class _AppBarBottom extends StatelessWidget {
+  const _AppBarBottom({this.showSortOptions});
+
+  final void Function()? showSortOptions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              FilterChip(
+                avatar: Icon(Icons.filter_list),
+                label: Text('Filters'),
+                onSelected: (_) {
+                  if (showSortOptions != null) {
+                    showSortOptions!();
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+        Container(color: Theme.of(context).dividerColor, height: 1.0),
+      ],
     );
   }
 }

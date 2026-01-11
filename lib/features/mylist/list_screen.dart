@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hoshi_list/features/mylist/widgets/tracking_list.dart';
-import 'package:hoshi_list/models/media_list_query.dart';
+import 'package:hoshi_list/models/constants/media_type.dart';
 import 'package:hoshi_list/models/tracked_media.dart';
 
 class ListScreen extends StatefulWidget {

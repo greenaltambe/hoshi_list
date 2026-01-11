@@ -1,3 +1,5 @@
+import 'package:hoshi_list/models/constants/media_format.dart';
+import 'package:hoshi_list/models/constants/media_status.dart';
 import 'package:hoshi_list/models/media.dart';
 
 class MediaDetailsMapper {
