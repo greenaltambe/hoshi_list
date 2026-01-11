@@ -1,3 +1,6 @@
+import 'package:hoshi_list/models/media_list_query.dart';
+import 'package:http/http.dart';
+
 class Media {
   Media({required this.id, required this.title, required this.imageUrl});
 

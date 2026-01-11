@@ -3,6 +3,7 @@ import 'package:hoshi_list/features/home/home_screen.dart';
 import 'package:hoshi_list/features/browse/browse_screen.dart';
 import 'package:hoshi_list/features/mylist/list_screen.dart';
 import 'package:hoshi_list/features/profile/profile_screen.dart';
+import 'package:hoshi_list/features/search/search_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -107,9 +108,15 @@ class _TabsScreenState extends State<TabsScreen> {
         }).toList(),
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+          if (index == 1 && _selectedIndex == 1) {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (ctx) => SearchScreen()));
+          } else {
+            setState(() {
+              _selectedIndex = index;
+            });
+          }
         },
       ),
     );

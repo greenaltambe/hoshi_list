@@ -47,6 +47,7 @@ class AnilistClient {
       "sort": !mediaQuery.sort.name.toLowerCase().contains('desc')
           ? mediaQuery.sort.name.toUpperCase()
           : mediaQuery.sort.name.toUpperCase().replaceAll('DESC', '_DESC'),
+      if (mediaQuery.searchString.isNotEmpty) "search": mediaQuery.searchString,
     };
 
     return variables;

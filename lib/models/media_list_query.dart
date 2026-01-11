@@ -30,12 +30,14 @@ class MediaQueryAL {
   final MediaSort sort;
   final int page;
   final int perPage;
+  final String searchString;
 
   const MediaQueryAL({
     required this.type,
-    this.sort = MediaSort.trending,
+    this.sort = MediaSort.popularityDesc,
     this.page = 1,
     this.perPage = 10,
+    this.searchString = '',
   });
 
   MediaQueryAL copyWith({int? page}) {
@@ -44,6 +46,7 @@ class MediaQueryAL {
       sort: sort,
       page: page ?? this.page,
       perPage: perPage,
+      searchString: searchString,
     );
   }
 
@@ -54,9 +57,10 @@ class MediaQueryAL {
             other.type == type &&
             other.sort == sort &&
             other.page == page &&
-            other.perPage == perPage;
+            other.perPage == perPage &&
+            other.searchString == searchString;
   }
 
   @override
-  int get hashCode => Object.hash(type, sort, page, perPage);
+  int get hashCode => Object.hash(type, sort, page, perPage, searchString);
 }
