@@ -27,17 +27,16 @@ class AnimeBrowseScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            HorizontalMediaList(query: _trendingQuery, title: 'Trending Anime'),
+            ExpandedHorizontalMediaList(
+              query: _trendingQuery,
+              title: 'Trending Anime',
+            ),
             SizedBox(height: 16),
             HorizontalMediaList(query: _popularQuery, title: 'Popular Anime'),
             SizedBox(height: 16),
             HorizontalMediaList(
               query: _topRatedQuery,
               title: 'Top Rated Anime',
-            ),
-            ExpandedHorizontalMediaList(
-              query: _trendingQuery,
-              title: 'Expanded Trending',
             ),
           ],
         ),

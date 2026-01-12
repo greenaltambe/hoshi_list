@@ -11,6 +11,7 @@ query ($page: Int, $perPage: Int, $type: MediaType, $sort: [MediaSort], $search:
       averageScore
       bannerImage
       description
+      genres
       title {
         romaji
         english

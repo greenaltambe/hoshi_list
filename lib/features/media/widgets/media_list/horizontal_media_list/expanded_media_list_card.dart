@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:hoshi_list/models/constants/genre_list.dart';
 import 'package:hoshi_list/models/media.dart';
 import 'package:hoshi_list/features/media/widgets/media_details/media_details_screen.dart';
 
@@ -119,19 +120,47 @@ class ExpandedMediaListCard extends StatelessWidget {
                 ),
 
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Html(
-                        data: item.description ?? 'No description available.',
-                        style: {
-                          '#': Style(
-                            maxLines: 6,
-                            textOverflow: TextOverflow.ellipsis,
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        item.genres != null
+                            ? Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Wrap(
+                                  spacing: 6,
+                                  runSpacing: -4,
+
+                                  children: item.genres!
+                                      .map(
+                                        (genre) => Chip(
+                                          backgroundColor: genreToColor[genre],
+                                          label: Text(
+                                            genreToString[genre]!,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          visualDensity: VisualDensity.compact,
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              )
+                            : Container(),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            child: Html(
+                              data:
+                                  item.description ??
+                                  'No description available.',
+                            ),
                           ),
-                        },
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

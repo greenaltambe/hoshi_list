@@ -1,0 +1,121 @@
+import 'dart:ui';
+
+enum Genre {
+  action,
+  adventure,
+  comedy,
+  drama,
+  ecchi,
+  fantasy,
+  hentai,
+  horror,
+  mahouShoujo,
+  mecha,
+  music,
+  mystery,
+  psychological,
+  romance,
+  sciFi,
+  sliceOfLife,
+  sports,
+  supernatural,
+  thriller,
+  other,
+}
+
+Map<String, Genre> stringToGenre = {
+  "Action": Genre.action,
+  "Adventure": Genre.adventure,
+  "Comedy": Genre.comedy,
+  "Drama": Genre.drama,
+  "Ecchi": Genre.ecchi,
+  "Fantasy": Genre.fantasy,
+  "Hentai": Genre.hentai,
+  "Horror": Genre.horror,
+  "Mahou Shoujo": Genre.mahouShoujo,
+  "Mecha": Genre.mecha,
+  "Music": Genre.music,
+  "Mystery": Genre.mystery,
+  "Psychological": Genre.psychological,
+  "Romance": Genre.romance,
+  "Sci-Fi": Genre.sciFi,
+  "Slice of Life": Genre.sliceOfLife,
+  "Sports": Genre.sports,
+  "Supernatural": Genre.supernatural,
+  "Thriller": Genre.thriller,
+  "Other": Genre.other,
+};
+
+Map<Genre, String> genreToString = {
+  Genre.action: "Action",
+  Genre.adventure: "Adventure",
+  Genre.comedy: "Comedy",
+  Genre.drama: "Drama",
+  Genre.ecchi: "Ecchi",
+  Genre.fantasy: "Fantasy",
+  Genre.hentai: "Hentai",
+  Genre.horror: "Horror",
+  Genre.mahouShoujo: "Mahou Shoujo",
+  Genre.mecha: "Mecha",
+  Genre.music: "Music",
+  Genre.mystery: "Mystery",
+  Genre.psychological: "Psychological",
+  Genre.romance: "Romance",
+  Genre.sciFi: "Sci-Fi",
+  Genre.sliceOfLife: "Slice of Life",
+  Genre.sports: "Sports",
+  Genre.supernatural: "Supernatural",
+  Genre.thriller: "Thriller",
+  Genre.other: "Other",
+};
+
+Map<Genre, Color> genreToColor = {
+  Genre.action: const Color(0xFFD32F2F),
+  Genre.adventure: const Color(0xFF1976D2),
+  Genre.comedy: const Color(0xFFFBC02D),
+  Genre.drama: const Color(0xFF7B1FA2),
+  Genre.ecchi: const Color(0xFFE64A19),
+  Genre.fantasy: const Color(0xFF512DA8),
+  Genre.hentai: const Color(0xFF00897B),
+  Genre.horror: const Color(0xFF303F9F),
+  Genre.mahouShoujo: const Color(0xFFF57C00),
+  Genre.mecha: const Color(0xFF455A64),
+  Genre.music: const Color(0xFFFFA000),
+  Genre.mystery: const Color(0xFF0288D1),
+  Genre.psychological: const Color(0xFF388E3C),
+  Genre.romance: const Color(0xFFC2185B),
+  Genre.sciFi: const Color(0xFF1565C0),
+  Genre.sliceOfLife: const Color(0xFF5D4037),
+  Genre.sports: const Color(0xFF00796B),
+  Genre.supernatural: const Color(0xFF6A1B9A),
+  Genre.thriller: const Color(0xFFC62828),
+  Genre.other: const Color(0xFF546E7A),
+};
+
+/**
+ * {
+  "data": {
+    "GenreCollection": [
+      "Action",
+      "Adventure",
+      "Comedy",
+      "Drama",
+      "Ecchi",
+      "Fantasy",
+      "Hentai",
+      "Horror",
+      "Mahou Shoujo",
+      "Mecha",
+      "Music",
+      "Mystery",
+      "Psychological",
+      "Romance",
+      "Sci-Fi",
+      "Slice of Life",
+      "Sports",
+      "Supernatural",
+      "Thriller"
+    ]
+  }
+}
+ */

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/expanded_horizontal_media_list.dart';
 import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/horizontal_media_list.dart';
 import 'package:hoshi_list/models/constants/media_sort.dart';
 import 'package:hoshi_list/models/constants/media_type.dart';
@@ -26,7 +27,10 @@ class MangaBrowseScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            HorizontalMediaList(query: _trendingQuery, title: 'Trending Manga'),
+            ExpandedHorizontalMediaList(
+              query: _trendingQuery,
+              title: 'Trending Manga',
+            ),
             SizedBox(height: 16),
             HorizontalMediaList(query: _popularQuery, title: 'Popular Manga'),
             SizedBox(height: 16),

@@ -1,3 +1,4 @@
+import 'package:hoshi_list/models/constants/genre_list.dart';
 import 'package:hoshi_list/models/constants/media_format.dart';
 import 'package:hoshi_list/models/constants/media_status.dart';
 
@@ -9,6 +10,7 @@ class Media {
     required this.avgScore,
     this.bannerImageUrl,
     this.description,
+    this.genres,
   });
 
   final int id;
@@ -17,6 +19,7 @@ class Media {
   final int avgScore;
   final String? bannerImageUrl;
   final String? description;
+  final List<Genre>? genres;
 }
 
 class MediaDetails {

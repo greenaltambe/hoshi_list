@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hoshi_list/models/constants/genre_list.dart';
 import 'package:hoshi_list/models/media.dart';
 import 'package:http/http.dart' as http;
 
@@ -39,6 +40,12 @@ class MediaMapper {
       final avgScore = mediaJson['averageScore'] as int? ?? 0;
       final bannerImageUrl = mediaJson['bannerImage'] as String?;
       final description = mediaJson['description'] as String?;
+      final genresJson = mediaJson['genres'] as List<dynamic>?;
+      final genres = genresJson != null
+          ? genresJson.map((genre) {
+              return stringToGenre[genre as String] ?? Genre.other;
+            }).toList()
+          : <Genre>[];
       return Media(
         id: id,
         title: title,
@@ -46,6 +53,7 @@ class MediaMapper {
         avgScore: avgScore,
         bannerImageUrl: bannerImageUrl,
         description: description,
+        genres: genres,
       );
     }).toList();
   }
