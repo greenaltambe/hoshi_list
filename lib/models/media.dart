@@ -7,12 +7,16 @@ class Media {
     required this.title,
     required this.imageUrl,
     required this.avgScore,
+    this.bannerImageUrl,
+    this.description,
   });
 
   final int id;
   final String title;
   final String imageUrl;
   final int avgScore;
+  final String? bannerImageUrl;
+  final String? description;
 }
 
 class MediaDetails {

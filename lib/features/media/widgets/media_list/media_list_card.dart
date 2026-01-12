@@ -18,7 +18,7 @@ class MediaListCard extends StatelessWidget {
     return InkWell(
       onTap: () => _onTapCard(context),
       splashFactory: InkRipple.splashFactory,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(4),
       child: Material(
         color: Colors.transparent,
         child: AspectRatio(

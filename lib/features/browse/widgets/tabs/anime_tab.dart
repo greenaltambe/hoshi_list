@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/expanded_horizontal_media_list.dart';
 import 'package:hoshi_list/features/media/widgets/media_list/horizontal_media_list/horizontal_media_list.dart';
 import 'package:hoshi_list/models/constants/media_sort.dart';
 import 'package:hoshi_list/models/constants/media_type.dart';
@@ -33,6 +34,10 @@ class AnimeBrowseScreen extends StatelessWidget {
             HorizontalMediaList(
               query: _topRatedQuery,
               title: 'Top Rated Anime',
+            ),
+            ExpandedHorizontalMediaList(
+              query: _trendingQuery,
+              title: 'Expanded Trending',
             ),
           ],
         ),
