@@ -71,7 +71,7 @@ class HorizontalMediaList extends ConsumerWidget {
               );
             } else {
               return SizedBox(
-                height: 180,
+                height: 200,
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   itemCount: 6,

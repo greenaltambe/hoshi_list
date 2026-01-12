@@ -62,7 +62,8 @@ class _AnimeMangaGridState extends ConsumerState<AnimeMangaGrid> {
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  childAspectRatio: 2 / 3,
+                  childAspectRatio: 2 / 3.5,
+                  mainAxisSpacing: 16,
                 ),
                 itemCount: items.length,
                 itemBuilder: (context, index) {

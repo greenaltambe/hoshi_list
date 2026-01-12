@@ -22,50 +22,30 @@ class MediaListCard extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: AspectRatio(
-          aspectRatio: 2 / 3,
-          child: Card(
-            clipBehavior:
-                Clip.hardEdge, // Ensures content doesn't overflow the card
-            child: Stack(
+          aspectRatio: 2 / 3.5,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.network(
-                  item.imageUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: Image.network(item.imageUrl, fit: BoxFit.cover),
+                  ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8.0,
-                      horizontal: 4.0,
-                    ),
-                    decoration: BoxDecoration(
-                      // gradient: LinearGradient(
-                      //   colors: [
-                      //     Colors.black.withAlpha(204),
-                      //     Colors.transparent,
-                      //   ],
-                      //   begin: Alignment.bottomCenter,
-                      //   end: Alignment.topCenter,
-                      // ),
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: SizedBox(
+                    height:
+                        (Theme.of(context).textTheme.bodySmall?.fontSize ??
+                            14) *
+                        2.5,
                     child: Text(
                       item.title,
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      // style: const TextStyle(
-                      //   color: Colors.white,
-                      //   fontWeight: FontWeight.bold,
-                      // ),
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                 ),

@@ -40,14 +40,15 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           },
           controller: _textController,
           decoration: InputDecoration(
-            hintText: 'Search...',
+            hintText:
+                'Search ${_currentSearchType == MediaTypeAL.anime ? 'Anime' : 'Manga'}',
             border: InputBorder.none,
           ),
           keyboardType: TextInputType.text,
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1.0),
-          child: Container(color: Colors.grey[300], height: 1.0),
+          child: Container(color: Theme.of(context).dividerColor, height: 1.0),
         ),
 
         actions: [
