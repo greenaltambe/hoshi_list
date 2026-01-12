@@ -23,23 +23,19 @@ class MangaBrowseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ExpandedHorizontalMediaList(
-              query: _trendingQuery,
-              title: 'Trending Manga',
-            ),
-            SizedBox(height: 16),
-            HorizontalMediaList(query: _popularQuery, title: 'Popular Manga'),
-            SizedBox(height: 16),
-            HorizontalMediaList(
-              query: _topRatedQuery,
-              title: 'Top Rated Manga',
-            ),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ExpandedHorizontalMediaList(
+            query: _trendingQuery,
+            title: 'Trending Manga',
+          ),
+          SizedBox(height: 16),
+          HorizontalMediaList(query: _popularQuery, title: 'Popular Manga'),
+          SizedBox(height: 16),
+          HorizontalMediaList(query: _topRatedQuery, title: 'Top Rated Manga'),
+        ],
       ),
     );
   }
