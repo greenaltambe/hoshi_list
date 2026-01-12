@@ -2,11 +2,17 @@ import 'package:hoshi_list/models/constants/media_format.dart';
 import 'package:hoshi_list/models/constants/media_status.dart';
 
 class Media {
-  Media({required this.id, required this.title, required this.imageUrl});
+  Media({
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+    required this.avgScore,
+  });
 
   final int id;
   final String title;
   final String imageUrl;
+  final int avgScore;
 }
 
 class MediaDetails {

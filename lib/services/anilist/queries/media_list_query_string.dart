@@ -8,6 +8,7 @@ query ($page: Int, $perPage: Int, $type: MediaType, $sort: [MediaSort], $search:
     }
     media(type: $type, sort: $sort, search: $search, format: $format, status: $status, countryOfOrigin: $countryOfOrigin, season: $season, startDate_greater: $minimumReleaseYear, startDate_lesser: $maximumReleaseYear, episodes_greater: $minimumEpisodes, episodes_lesser: $maximumEpisodes, chapters_greater: $minimumChapters, chapters_lesser: $maximumChapters, averageScore_greater: $minimumAverageScore, averageScore_lesser: $maximumAverageScore) {
       id
+      averageScore
       title {
         romaji
         english

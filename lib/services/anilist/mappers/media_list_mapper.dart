@@ -36,7 +36,13 @@ class MediaMapper {
           mediaJson['title']['romaji'] as String? ??
           'No Title';
       final imageUrl = mediaJson['coverImage']['large'] as String;
-      return Media(id: id, title: title, imageUrl: imageUrl);
+      final avgScore = mediaJson['averageScore'] as int? ?? 0;
+      return Media(
+        id: id,
+        title: title,
+        imageUrl: imageUrl,
+        avgScore: avgScore,
+      );
     }).toList();
   }
 }
