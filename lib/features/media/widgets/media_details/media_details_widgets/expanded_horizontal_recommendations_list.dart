@@ -18,6 +18,9 @@ class ExpandedHorizontalRecommendationsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final items = ref.watch(mediaRecommendationListProvider(mediaId));
+    final notifier = ref.read(
+      mediaRecommendationListProvider(mediaId).notifier,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,11 +61,21 @@ class ExpandedHorizontalRecommendationsList extends ConsumerWidget {
                 height: 300,
                 child: ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  itemCount: items.length,
-                  itemBuilder: (context, index) => SizedBox(
-                    width: 300,
-                    child: ExpandedMediaListCard(item: items[index]),
-                  ),
+                  itemCount: items.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index == items.length) {
+                      return TextButton(
+                        onPressed: () {
+                          notifier.loadNextPage();
+                        },
+                        child: Icon(Icons.arrow_forward_ios),
+                      ); // Extra padding at the end
+                    }
+                    return SizedBox(
+                      width: 300,
+                      child: ExpandedMediaListCard(item: items[index]),
+                    );
+                  },
                   scrollDirection: Axis.horizontal,
                 ),
               );
