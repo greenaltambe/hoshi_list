@@ -28,8 +28,21 @@ class StaffListTab extends ConsumerWidget {
             ),
             data: (staffList) => ListView.builder(
               padding: EdgeInsets.zero,
-              itemCount: staffList.length,
+              itemCount: staffList.length + 1,
               itemBuilder: (context, index) {
+                if (index == staffList.length) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ref
+                            .read(mediaStaffListProvider(mediaId).notifier)
+                            .loadNextPage();
+                      },
+                      child: const Text('Load more'),
+                    ),
+                  );
+                }
                 final staff = staffList[index];
                 return ListTile(
                   leading: ClipRRect(
@@ -51,12 +64,6 @@ class StaffListTab extends ConsumerWidget {
               },
             ),
           ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            ref.read(mediaStaffListProvider(mediaId).notifier).loadNextPage();
-          },
-          child: const Text('Load more'),
         ),
       ],
     );

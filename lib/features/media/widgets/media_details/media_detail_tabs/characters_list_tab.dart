@@ -28,8 +28,21 @@ class CharactersListTab extends ConsumerWidget {
             ),
             data: (characterList) => ListView.builder(
               padding: EdgeInsets.zero,
-              itemCount: characterList.length,
+              itemCount: characterList.length + 1,
               itemBuilder: (context, index) {
+                if (index == characterList.length) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ref
+                            .read(mediaCharacterListProvider(mediaId).notifier)
+                            .loadNextPage();
+                      },
+                      child: const Text('Load more'),
+                    ),
+                  );
+                }
                 final character = characterList[index];
                 return ListTile(
                   leading: ClipRRect(
@@ -51,14 +64,6 @@ class CharactersListTab extends ConsumerWidget {
               },
             ),
           ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            ref
-                .read(mediaCharacterListProvider(mediaId).notifier)
-                .loadNextPage();
-          },
-          child: const Text('Load more'),
         ),
       ],
     );

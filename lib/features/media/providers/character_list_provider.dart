@@ -30,7 +30,7 @@ class MediaCharacterListNotifier extends AsyncNotifier<List<MediaCharacter>> {
       MediaCharacterQueryAL(
         mediaId: id,
         page: _currentPage,
-        sort: [MediaCharacterSort.relevance],
+        sort: [MediaCharacterSort.role],
       ),
     );
 

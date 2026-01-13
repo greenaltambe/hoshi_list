@@ -1,5 +1,8 @@
+import 'package:hoshi_list/models/constants/external_links.dart';
+import 'package:hoshi_list/models/constants/genre_list.dart';
 import 'package:hoshi_list/models/constants/media_format.dart';
 import 'package:hoshi_list/models/constants/media_status.dart';
+import 'package:hoshi_list/models/constants/media_type.dart';
 import 'package:hoshi_list/models/media.dart';
 
 class MediaDetailsMapper {
@@ -36,14 +39,33 @@ class MediaDetailsMapper {
     final episodes = mediaJson['episodes'] as int?;
     final chapters = mediaJson['chapters'] as int?;
     final averageScore = (mediaJson['averageScore'] as int?)?.toDouble();
-    final genres =
-        (mediaJson['genres'] as List<dynamic>?)
-            ?.map((genre) => genre as String)
-            .toList() ??
-        [];
+    final season = mediaJson['season'] as String?;
+    final favourites = mediaJson['favourites'] as int?;
+    final genreJson = (mediaJson['genres'] as List<dynamic>?)?.cast<String>();
+    MediaTypeAL type =
+        stringToMediaTypeAL[mediaJson['type'] as String] ?? MediaTypeAL.anime;
+    final externalLinksJson = mediaJson['externalLinks'] as List<dynamic>?;
+    List<ExternalLinks>? externalLinks;
+    if (externalLinksJson != null) {
+      externalLinks = externalLinksJson.map((linkJson) {
+        return ExternalLinks(
+          url: linkJson['url'] as String,
+          siteName: linkJson['site'] as String,
+          iconUrl: linkJson['icon'] as String?,
+          colorHex: linkJson['color'] as String?,
+        );
+      }).toList();
+    }
+
+    final genres = genreJson != null
+        ? genreJson.map((genre) {
+            return stringToGenre[genre] ?? Genre.other;
+          }).toList()
+        : <Genre>[];
 
     return MediaDetails(
       id: id,
+      type: type,
       romajiTitle: romajiTitle,
       englishTitle: englishTitle,
       nativeTitle: nativeTitle,
@@ -62,7 +84,10 @@ class MediaDetailsMapper {
       episodes: episodes,
       chapters: chapters,
       averageScore: averageScore,
+      season: season,
+      favourites: favourites,
       genres: genres,
+      externalLinks: externalLinks,
     );
   }
 }

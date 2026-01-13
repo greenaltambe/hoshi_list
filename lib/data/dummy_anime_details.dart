@@ -1,10 +1,13 @@
+import 'package:hoshi_list/models/constants/genre_list.dart';
 import 'package:hoshi_list/models/constants/media_format.dart';
 import 'package:hoshi_list/models/constants/media_status.dart';
+import 'package:hoshi_list/models/constants/media_type.dart';
 import 'package:hoshi_list/models/media.dart';
 
 final dummyMediaDetails = <int, MediaDetails>{
   1: MediaDetails(
     id: 1,
+    type: MediaTypeAL.anime,
     romajiTitle: 'Fullmetal Alchemist: Brotherhood',
     bannerImageUrl: 'https://picsum.photos/400/600?1', // poster
     coverImageUrl: 'https://picsum.photos/900/500?1', // cover / banner
@@ -16,11 +19,12 @@ final dummyMediaDetails = <int, MediaDetails>{
     startDate: DateTime(2009, 4, 5),
     episodes: 64,
     averageScore: 91,
-    genres: ['Action', 'Adventure', 'Drama', 'Fantasy'],
+    genres: [Genre.action, Genre.adventure, Genre.fantasy],
   ),
 
   2: MediaDetails(
     id: 2,
+    type: MediaTypeAL.anime,
     romajiTitle: 'Attack on Titan',
     bannerImageUrl: 'https://picsum.photos/400/600?2',
     coverImageUrl: 'https://picsum.photos/900/500?2',
@@ -32,11 +36,12 @@ final dummyMediaDetails = <int, MediaDetails>{
     startDate: DateTime(2013, 4, 7),
     episodes: 87,
     averageScore: 88,
-    genres: ['Action', 'Drama', 'Fantasy'],
+    genres: [Genre.action, Genre.drama, Genre.fantasy],
   ),
 
   5: MediaDetails(
     id: 5,
+    type: MediaTypeAL.anime,
     romajiTitle: 'Jujutsu Kaisen',
     bannerImageUrl: 'https://picsum.photos/400/600?5',
     coverImageUrl: 'https://picsum.photos/900/500?5',
@@ -48,6 +53,6 @@ final dummyMediaDetails = <int, MediaDetails>{
     startDate: DateTime(2020, 10, 3),
     episodes: 47,
     averageScore: 84,
-    genres: ['Action', 'Supernatural'],
+    genres: [Genre.action, Genre.supernatural, Genre.horror],
   ),
 };

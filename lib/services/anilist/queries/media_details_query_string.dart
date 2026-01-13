@@ -2,6 +2,7 @@ final mediaDetailsQueryString = r'''
   query ($id: Int) {
   Media (id: $id) {
     id
+    type
     title {
       romaji
       english
@@ -23,6 +24,14 @@ final mediaDetailsQueryString = r'''
     chapters
     averageScore
     genres
+    season
+    favourites
+    externalLinks {
+      url
+      icon
+      color
+      site
+    }
   }
 }
 ''';

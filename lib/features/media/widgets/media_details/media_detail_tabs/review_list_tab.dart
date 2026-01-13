@@ -20,8 +20,21 @@ class ReviewListTab extends ConsumerWidget {
             return Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.zero,
-                itemCount: reviews.length,
+                itemCount: reviews.length + 1,
                 itemBuilder: (context, index) {
+                  if (index == reviews.length) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          ref
+                              .read(mediaReviewListProvider(mediaId).notifier)
+                              .loadNextPage();
+                        },
+                        child: const Text('Load more'),
+                      ),
+                    );
+                  }
                   final review = reviews[index];
                   return ListTile(
                     onTap: () {

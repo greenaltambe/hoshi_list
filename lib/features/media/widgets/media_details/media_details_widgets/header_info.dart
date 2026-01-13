@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hoshi_list/features/media/widgets/media_details/media_details_widgets/media_description.dart';
+import 'package:hoshi_list/models/constants/genre_list.dart';
 import 'package:hoshi_list/models/media.dart';
 
 // Top section with cover image, poster, and title widget
@@ -98,6 +99,30 @@ class HeaderInfoSection extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.primary,
                               ),
+                        ),
+
+                        Text(
+                          mediaDetails.format.name.toUpperCase(),
+                          style: Theme.of(context).textTheme.bodySmall!,
+                        ),
+
+                        Text(
+                          '${mediaDetails.season?.toUpperCase()} ${mediaDetails.startDate?.year ?? ''}',
+                          style: Theme.of(context).textTheme.bodySmall!,
+                        ),
+
+                        Wrap(
+                          spacing: 6,
+                          runSpacing: -4,
+
+                          children: mediaDetails.genres
+                              .map(
+                                (genre) => Chip(
+                                  label: Text(genreToString[genre]!),
+                                  visualDensity: VisualDensity.compact,
+                                ),
+                              )
+                              .toList(),
                         ),
                       ],
                     ),

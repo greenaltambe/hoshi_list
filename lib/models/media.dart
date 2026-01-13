@@ -1,6 +1,8 @@
+import 'package:hoshi_list/models/constants/external_links.dart';
 import 'package:hoshi_list/models/constants/genre_list.dart';
 import 'package:hoshi_list/models/constants/media_format.dart';
 import 'package:hoshi_list/models/constants/media_status.dart';
+import 'package:hoshi_list/models/constants/media_type.dart';
 
 class Media {
   Media({
@@ -24,6 +26,7 @@ class Media {
 
 class MediaDetails {
   final int id;
+  final MediaTypeAL type;
   final String romajiTitle;
   final String? englishTitle;
   final String? nativeTitle;
@@ -38,11 +41,15 @@ class MediaDetails {
   final int? episodes; // anime only
   final int? chapters; // manga only
   final double? averageScore;
+  final String? season;
+  final int? favourites;
 
-  final List<String> genres;
+  final List<Genre> genres;
+  final List<ExternalLinks>? externalLinks;
 
   MediaDetails({
     required this.id,
+    required this.type,
     required this.romajiTitle,
     this.englishTitle,
     this.nativeTitle,
@@ -50,11 +57,14 @@ class MediaDetails {
     required this.description,
     required this.format,
     required this.status,
+    required this.genres,
+    this.externalLinks,
     this.bannerImageUrl,
     this.startDate,
     this.episodes,
     this.chapters,
     this.averageScore,
-    required this.genres,
+    this.season,
+    this.favourites,
   });
 }
