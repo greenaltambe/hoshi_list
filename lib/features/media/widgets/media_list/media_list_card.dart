@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hoshi_list/models/media.dart';
 import 'package:hoshi_list/features/media/widgets/media_details/media_details_screen.dart';
+import 'package:hoshi_list/models/media_card_item.dart';
 
 class MediaListCard extends StatelessWidget {
   const MediaListCard({super.key, required this.item});
 
-  final Media item;
+  final MediaCardItem item;
 
   void _onTapCard(BuildContext context) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => MediaDetailsScreen(item: item)),
+      MaterialPageRoute(
+        builder: (context) => MediaDetailsScreen.fromId(mediaId: item.id),
+      ),
     );
   }
 

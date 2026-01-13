@@ -1,0 +1,47 @@
+enum MediaRelations {
+  adaptation,
+  alternative,
+  character,
+  compilation,
+  contains,
+  other,
+  parent,
+  prequel,
+  sequel,
+  sideStory,
+  source,
+  spinOff,
+  summary,
+}
+
+Map<MediaRelations, String> mediaRelationsToString = {
+  MediaRelations.adaptation: 'Adaptation',
+  MediaRelations.alternative: 'Alternative',
+  MediaRelations.character: 'Character',
+  MediaRelations.compilation: 'Compilation',
+  MediaRelations.contains: 'Contains',
+  MediaRelations.other: 'Other',
+  MediaRelations.parent: 'Parent',
+  MediaRelations.prequel: 'Prequel',
+  MediaRelations.sequel: 'Sequel',
+  MediaRelations.sideStory: 'Side Story',
+  MediaRelations.source: 'Source',
+  MediaRelations.spinOff: 'Spin Off',
+  MediaRelations.summary: 'Summary',
+};
+
+Map<String, MediaRelations> stringToMediaRelations = {
+  'ADAPTATION': MediaRelations.adaptation,
+  'ALTERNATIVE': MediaRelations.alternative,
+  'CHARACTER': MediaRelations.character,
+  'COMPILATION': MediaRelations.compilation,
+  'CONTAINS': MediaRelations.contains,
+  'OTHER': MediaRelations.other,
+  'PARENT': MediaRelations.parent,
+  'PREQUEL': MediaRelations.prequel,
+  'SEQUEL': MediaRelations.sequel,
+  'SIDE_STORY': MediaRelations.sideStory,
+  'SOURCE': MediaRelations.source,
+  'SPIN_OFF': MediaRelations.spinOff,
+  'SUMMARY': MediaRelations.summary,
+};

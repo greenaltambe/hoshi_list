@@ -3,8 +3,9 @@ import 'package:hoshi_list/models/constants/genre_list.dart';
 import 'package:hoshi_list/models/constants/media_format.dart';
 import 'package:hoshi_list/models/constants/media_status.dart';
 import 'package:hoshi_list/models/constants/media_type.dart';
+import 'package:hoshi_list/models/media_card_item.dart';
 
-class Media {
+class Media implements MediaCardItem {
   Media({
     required this.id,
     required this.title,
@@ -15,11 +16,21 @@ class Media {
     this.genres,
   });
 
+  @override
   final int id;
+
+  @override
   final String title;
+
+  @override
   final String imageUrl;
+
+  @override
   final int avgScore;
+
+  @override
   final String? bannerImageUrl;
+
   final String? description;
   final List<Genre>? genres;
 }
