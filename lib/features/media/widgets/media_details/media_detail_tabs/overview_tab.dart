@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:hoshi_list/features/media/widgets/media_details/media_details_widgets/expanded_horizontal_recommendations_list.dart';
 import 'package:hoshi_list/models/constants/media_type.dart';
 import 'package:hoshi_list/models/media.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -140,6 +141,11 @@ class OverviewTab extends StatelessWidget {
                   ),
                 ),
               ),
+
+            ExpandedHorizontalRecommendationsList(
+              mediaId: mediaDetails.id,
+              title: 'Recommendations',
+            ),
           ],
         ),
       ),

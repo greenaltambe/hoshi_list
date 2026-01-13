@@ -9,6 +9,7 @@ import 'package:hoshi_list/services/anilist/queries/character_details_query_stri
 import 'package:hoshi_list/services/anilist/queries/characters_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_list_query_string.dart';
+import 'package:hoshi_list/services/anilist/queries/media_recommendation_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_review_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/staff_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/staff_list_query_string.dart';
@@ -152,5 +153,14 @@ class AnilistClient {
           .toList(),
     };
     return _performQuery(mediaReviewListQueryString, variables);
+  }
+
+  Future<http.Response> getMediaRecommendations(
+    int mediaId, {
+    int page = 1,
+    int perPage = 10,
+  }) async {
+    final variables = {"mediaId": mediaId, "page": page, "perPage": perPage};
+    return _performQuery(mediaRecommendationListQueryString, variables);
   }
 }
