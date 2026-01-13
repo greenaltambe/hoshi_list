@@ -6,3 +6,10 @@ Map<MediaSeason, String> mediaSeasonToString = {
   MediaSeason.summer: 'SUMMER',
   MediaSeason.fall: 'FALL',
 };
+
+Map<String, MediaSeason> stringToMediaSeason = {
+  'WINTER': MediaSeason.winter,
+  'SPRING': MediaSeason.spring,
+  'SUMMER': MediaSeason.summer,
+  'FALL': MediaSeason.fall,
+};

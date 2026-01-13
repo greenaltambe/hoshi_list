@@ -1,6 +1,7 @@
 import 'package:hoshi_list/models/constants/external_links.dart';
 import 'package:hoshi_list/models/constants/genre_list.dart';
 import 'package:hoshi_list/models/constants/media_format.dart';
+import 'package:hoshi_list/models/constants/media_season.dart';
 import 'package:hoshi_list/models/constants/media_status.dart';
 import 'package:hoshi_list/models/constants/media_type.dart';
 import 'package:hoshi_list/models/media_card_item.dart';
@@ -52,7 +53,7 @@ class MediaDetails {
   final int? episodes; // anime only
   final int? chapters; // manga only
   final double? averageScore;
-  final String? season;
+  final MediaSeason? season;
   final int? favourites;
 
   final List<Genre> genres;

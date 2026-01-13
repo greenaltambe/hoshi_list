@@ -1,6 +1,7 @@
 import 'package:hoshi_list/models/constants/external_links.dart';
 import 'package:hoshi_list/models/constants/genre_list.dart';
 import 'package:hoshi_list/models/constants/media_format.dart';
+import 'package:hoshi_list/models/constants/media_season.dart';
 import 'package:hoshi_list/models/constants/media_status.dart';
 import 'package:hoshi_list/models/constants/media_type.dart';
 import 'package:hoshi_list/models/media.dart';
@@ -39,7 +40,9 @@ class MediaDetailsMapper {
     final episodes = mediaJson['episodes'] as int?;
     final chapters = mediaJson['chapters'] as int?;
     final averageScore = (mediaJson['averageScore'] as int?)?.toDouble();
-    final season = mediaJson['season'] as String?;
+    final season = mediaJson['season'] != null
+        ? stringToMediaSeason[mediaJson['season'] as String]
+        : null;
     final favourites = mediaJson['favourites'] as int?;
     final genreJson = (mediaJson['genres'] as List<dynamic>?)?.cast<String>();
     MediaTypeAL type =
