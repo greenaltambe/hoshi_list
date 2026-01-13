@@ -34,9 +34,12 @@ class ExpandedMediaListCard extends StatelessWidget {
                   child: Stack(
                     children: [
                       Positioned.fill(
-                        child: Image.network(
-                          item.bannerImageUrl ?? item.imageUrl,
-                          fit: BoxFit.cover,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: Image.network(
+                            item.bannerImageUrl ?? item.imageUrl,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
 

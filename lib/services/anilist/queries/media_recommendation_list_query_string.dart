@@ -11,6 +11,7 @@ query MediaRecommendation($mediaId: Int!, $page: Int!, $perPage: Int!) {
           averageScore
           bannerImage
           description 
+          genres
           title {
             romaji
             english
