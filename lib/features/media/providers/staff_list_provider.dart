@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/models/staff.dart';
 import 'package:hoshi_list/services/anilist/anilist_client.dart';
+import 'package:hoshi_list/services/anilist/anilist_provider.dart';
 import 'package:hoshi_list/services/anilist/mappers/media_staff_list_mapper.dart';
 
-final alClient = AnilistClient();
 final mediaStaffListMapper = MediaStaffListMapper();
 
 final mediaStaffListProvider =
@@ -18,13 +18,15 @@ class MediaStaffListNotifier extends AsyncNotifier<List<MediaStaff>> {
 
   final int id;
 
+  late final AnilistClient _alClient;
   int _currentPage = 1;
   bool _hasNextPage = true;
   bool _isLoadingMore = false;
 
   @override
   Future<List<MediaStaff>> build() async {
-    final response = await alClient.fetchMediaStaff(
+    _alClient = ref.watch(anilistProvider);
+    final response = await _alClient.fetchMediaStaff(
       MediaStaffQueryAL(
         mediaId: id,
         page: _currentPage,
@@ -52,7 +54,7 @@ class MediaStaffListNotifier extends AsyncNotifier<List<MediaStaff>> {
         page: _currentPage,
         sort: [MediaStaffSort.relevance],
       );
-      final response = await alClient.fetchMediaStaff(nextQuery);
+      final response = await _alClient.fetchMediaStaff(nextQuery);
       final decodedResponse = jsonDecode(response.body);
       final nextItems = mediaStaffListMapper.toMediaStaffList(decodedResponse);
 

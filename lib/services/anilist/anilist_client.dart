@@ -14,10 +14,14 @@ import 'package:hoshi_list/services/anilist/queries/media_relations_query_string
 import 'package:hoshi_list/services/anilist/queries/media_review_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/staff_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/staff_list_query_string.dart';
+import 'package:hoshi_list/services/anilist/queries/user_profile_query_string.dart';
 import 'package:http/http.dart' as http;
 
 class AnilistClient {
+  AnilistClient(this._token);
+
   String baseUrl = "https://graphql.anilist.co";
+  final String? _token;
 
   Future<http.Response> _performQuery(
     String query,
@@ -29,11 +33,12 @@ class AnilistClient {
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
+          if (_token != null) "Authorization": "Bearer $_token",
         },
         body: jsonEncode({"query": query, "variables": variables}),
       );
 
-      print(response.body);
+      // print(response.body);
 
       return response;
     } catch (e) {
@@ -168,5 +173,10 @@ class AnilistClient {
   Future<http.Response> fetchMediaRelationsList(int mediaId) async {
     final variables = {"mediaId": mediaId};
     return _performQuery(mediaRelationsQueryString, variables);
+  }
+
+  Future<http.Response> fetchUserProfile() async {
+    final variables = {"": null};
+    return _performQuery(userProfileQueryString, variables);
   }
 }

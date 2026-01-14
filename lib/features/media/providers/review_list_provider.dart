@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/models/review.dart';
 import 'package:hoshi_list/services/anilist/anilist_client.dart';
+import 'package:hoshi_list/services/anilist/anilist_provider.dart';
 import 'package:hoshi_list/services/anilist/mappers/media_review_list_mapper.dart';
 
-final alClient = AnilistClient();
 final mediaReviewListMapper = MediaReviewListMapper();
 
 final mediaReviewListProvider =
@@ -24,9 +24,12 @@ class MediaReviewListNotifier extends AsyncNotifier<List<MediaReview>> {
   bool _hasNextPage = true;
   bool _isLoadingMore = false;
 
+  late final AnilistClient _alClient;
+
   @override
   Future<List<MediaReview>> build() async {
-    final response = await alClient.fetchMediaReviewList(
+    _alClient = ref.watch(anilistProvider);
+    final response = await _alClient.fetchMediaReviewList(
       MediaReviewQueryAL(
         mediaId: id,
         page: 1,
@@ -56,7 +59,7 @@ class MediaReviewListNotifier extends AsyncNotifier<List<MediaReview>> {
         perPage: 10,
         sort: [MediaReviewSort.scoreDesc],
       );
-      final response = await alClient.fetchMediaReviewList(nextQuery);
+      final response = await _alClient.fetchMediaReviewList(nextQuery);
       final decodedResponse = jsonDecode(response.body);
       final nextItems = mediaReviewListMapper.toMediaReviewList(
         decodedResponse,

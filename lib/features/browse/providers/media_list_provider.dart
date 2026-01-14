@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/models/media.dart';
 import 'package:hoshi_list/models/media_list_query.dart';
 import 'package:hoshi_list/services/anilist/anilist_client.dart';
+import 'package:hoshi_list/services/anilist/anilist_provider.dart';
 import 'package:hoshi_list/services/anilist/mappers/media_list_mapper.dart';
 
-final alClient = AnilistClient();
 final mediaMapper = MediaMapper();
 
 final mediaListProvider =
@@ -22,9 +22,12 @@ class MediaListNotifier extends AsyncNotifier<List<Media>> {
   bool _hasNextPage = true;
   bool _isLoadingMore = false;
 
+  late final AnilistClient _alClient;
+
   @override
   Future<List<Media>> build() async {
-    final response = await alClient.fetchMedia(mediaQuery);
+    _alClient = ref.watch(anilistProvider);
+    final response = await _alClient.fetchMedia(mediaQuery);
     final result = mediaMapper.mapMediaList(response);
 
     _currentPage++;
@@ -40,7 +43,7 @@ class MediaListNotifier extends AsyncNotifier<List<Media>> {
 
     try {
       final nextQuery = mediaQuery.copyWith(page: _currentPage);
-      final response = await alClient.fetchMedia(nextQuery);
+      final response = await _alClient.fetchMedia(nextQuery);
       final nextItems = mediaMapper.mapMediaList(response);
 
       if (nextItems.isEmpty) {

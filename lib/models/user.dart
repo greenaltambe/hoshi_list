@@ -2,16 +2,13 @@ class User {
   final int id;
   final String name;
   final String avatarUrl;
-
-  final AnimeStats? animeStatistics;
-  final MangaStats? mangaStatistics;
+  final String? about;
 
   User({
     required this.id,
     required this.name,
     required this.avatarUrl,
-    this.animeStatistics,
-    this.mangaStatistics,
+    this.about,
   });
 
   @override
@@ -21,36 +18,35 @@ class User {
             other.id == id &&
             other.name == name &&
             other.avatarUrl == avatarUrl &&
-            other.animeStatistics == animeStatistics &&
-            other.mangaStatistics == mangaStatistics;
+            other.about == about;
   }
 
   @override
   int get hashCode {
-    return Object.hash(id, name, avatarUrl, animeStatistics, mangaStatistics);
+    return Object.hash(id, name, avatarUrl, about);
   }
 }
 
-class AnimeStats {
-  final int count;
-  final int episodesWatched;
-  final double meanScore;
+// class AnimeStats {
+//   final int count;
+//   final int episodesWatched;
+//   final double meanScore;
 
-  AnimeStats({
-    required this.count,
-    required this.episodesWatched,
-    required this.meanScore,
-  });
-}
+//   AnimeStats({
+//     required this.count,
+//     required this.episodesWatched,
+//     required this.meanScore,
+//   });
+// }
 
-class MangaStats {
-  final int count;
-  final int chaptersRead;
-  final double meanScore;
+// class MangaStats {
+//   final int count;
+//   final int chaptersRead;
+//   final double meanScore;
 
-  MangaStats({
-    required this.count,
-    required this.chaptersRead,
-    required this.meanScore,
-  });
-}
+//   MangaStats({
+//     required this.count,
+//     required this.chaptersRead,
+//     required this.meanScore,
+//   });
+// }

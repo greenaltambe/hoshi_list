@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/models/media.dart';
 import 'package:hoshi_list/services/anilist/anilist_client.dart';
+import 'package:hoshi_list/services/anilist/anilist_provider.dart';
 import 'package:hoshi_list/services/anilist/mappers/media_recommendation_list_mapper.dart';
 
-final alClient = AnilistClient();
 final mediaMapper = MediaRecommendationListMapper();
 
 final mediaRecommendationListProvider =
@@ -21,9 +21,12 @@ class MediaRecommendationListProvider extends AsyncNotifier<List<Media>> {
   bool _hasNextPage = true;
   bool _isLoadingMore = false;
 
+  late final AnilistClient _alClient;
+
   @override
   Future<List<Media>> build() async {
-    final response = await alClient.getMediaRecommendations(mediaId);
+    _alClient = ref.watch(anilistProvider);
+    final response = await _alClient.getMediaRecommendations(mediaId);
     final result = mediaMapper.mapMediaList(response);
 
     _currentPage++;
@@ -38,7 +41,7 @@ class MediaRecommendationListProvider extends AsyncNotifier<List<Media>> {
     _isLoadingMore = true;
 
     try {
-      final response = await alClient.getMediaRecommendations(
+      final response = await _alClient.getMediaRecommendations(
         mediaId,
         page: _currentPage,
       );

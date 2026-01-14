@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/models/media_character.dart';
 import 'package:hoshi_list/services/anilist/anilist_client.dart';
+import 'package:hoshi_list/services/anilist/anilist_provider.dart';
 import 'package:hoshi_list/services/anilist/mappers/media_character_list_mapper.dart';
 
-final alClient = AnilistClient();
 final mediaCharacterListMapper = MediaCharacterListMapper();
 
 final mediaCharacterListProvider =
@@ -24,9 +24,12 @@ class MediaCharacterListNotifier extends AsyncNotifier<List<MediaCharacter>> {
   bool _hasNextPage = true;
   bool _isLoadingMore = false;
 
+  late final AnilistClient _alClient;
+
   @override
   Future<List<MediaCharacter>> build() async {
-    final response = await alClient.fetchMediaCharacters(
+    _alClient = ref.watch(anilistProvider);
+    final response = await _alClient.fetchMediaCharacters(
       MediaCharacterQueryAL(
         mediaId: id,
         page: _currentPage,
@@ -54,7 +57,7 @@ class MediaCharacterListNotifier extends AsyncNotifier<List<MediaCharacter>> {
         page: _currentPage,
         sort: [MediaCharacterSort.relevance],
       );
-      final response = await alClient.fetchMediaCharacters(nextQuery);
+      final response = await _alClient.fetchMediaCharacters(nextQuery);
       final decodedResponse = jsonDecode(response.body);
       final nextItems = mediaCharacterListMapper.fromJson(decodedResponse);
 
