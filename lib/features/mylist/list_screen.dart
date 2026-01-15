@@ -37,10 +37,10 @@ class _ListScreenState extends ConsumerState<ListScreen> {
     return Center(
       child: mediaListCollection.when(
         loading: () {
-          return Column(children: const [CircularProgressIndicator()]);
+          return const Center(child: CircularProgressIndicator());
         },
         error: (error, stackTrace) {
-          return Column(children: [Text('Error loading list: $error')]);
+          return Center(child: Text('Error loading list: $error'));
         },
         data: (data) {
           final groups = data;
