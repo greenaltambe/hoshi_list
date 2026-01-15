@@ -96,7 +96,19 @@ class _ListScreenState extends ConsumerState<ListScreen> {
                   // The content of each tab
                   child: TabBarView(
                     children: groups.map((group) {
-                      return TrackingList(group: group);
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          return ref.refresh(
+                            mediaCollectionProvider(
+                              MediaCollectionArgs(
+                                mediaType: _selectedMediaType,
+                                userId: userId,
+                              ),
+                            ),
+                          );
+                        },
+                        child: TrackingList(group: group),
+                      );
                     }).toList(),
                   ),
                 ),
