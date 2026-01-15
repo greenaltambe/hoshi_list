@@ -11,6 +11,7 @@ query ($type: MediaType!, $userId: Int!) {
         progress
         media {
           id
+          type
           title {
             romaji
             english
@@ -23,6 +24,8 @@ query ($type: MediaType!, $userId: Int!) {
           averageScore
           description
           genres
+          episodes
+          chapters
         }
       }
     }

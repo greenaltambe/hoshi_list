@@ -15,6 +15,9 @@ class Media implements MediaCardItem {
     this.bannerImageUrl,
     this.description,
     this.genres,
+    this.type,
+    this.episodes,
+    this.chapters,
   });
 
   @override
@@ -32,8 +35,13 @@ class Media implements MediaCardItem {
   @override
   final String? bannerImageUrl;
 
+  final MediaTypeAL? type;
+
   final String? description;
   final List<Genre>? genres;
+
+  final int? episodes;
+  final int? chapters;
 }
 
 class MediaDetails {
