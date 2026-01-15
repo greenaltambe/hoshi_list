@@ -20,7 +20,7 @@ class ExpandedMediaListCard extends StatelessWidget {
     return InkWell(
       onTap: () => _onTapCard(context),
       splashFactory: InkRipple.splashFactory,
-      borderRadius: BorderRadius.circular(4),
+      borderRadius: BorderRadius.circular(16),
       child: Material(
         color: Colors.transparent,
 
@@ -35,7 +35,10 @@ class ExpandedMediaListCard extends StatelessWidget {
                     children: [
                       Positioned.fill(
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                          ),
                           child: Image.network(
                             item.bannerImageUrl ?? item.imageUrl,
                             fit: BoxFit.cover,
@@ -66,7 +69,7 @@ class ExpandedMediaListCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(16),
                               child: Image.network(
                                 item.imageUrl,
                                 width: 60,

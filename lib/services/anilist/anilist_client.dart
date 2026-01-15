@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:hoshi_list/models/constants/media_sort.dart';
+import 'package:hoshi_list/models/constants/media_type.dart';
 import 'package:hoshi_list/models/media_character.dart';
 import 'package:hoshi_list/models/media_list_query.dart';
 import 'package:hoshi_list/models/review.dart';
@@ -8,6 +9,7 @@ import 'package:hoshi_list/models/staff.dart';
 import 'package:hoshi_list/services/anilist/queries/character_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/characters_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_details_query_string.dart';
+import 'package:hoshi_list/services/anilist/queries/media_list_collection_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_recommendation_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_relations_query_string.dart';
@@ -38,7 +40,7 @@ class AnilistClient {
         body: jsonEncode({"query": query, "variables": variables}),
       );
 
-      // print(response.body);
+      print(response.body);
 
       return response;
     } catch (e) {
@@ -178,5 +180,13 @@ class AnilistClient {
   Future<http.Response> fetchUserProfile() async {
     final variables = {"": null};
     return _performQuery(userProfileQueryString, variables);
+  }
+
+  Future<http.Response> fetchMediaListCollection(
+    MediaTypeAL mediaType,
+    int userId,
+  ) async {
+    final variables = {"type": mediaType.name.toUpperCase(), "userId": userId};
+    return _performQuery(mediaListCollectionQueryString, variables);
   }
 }

@@ -10,18 +10,3 @@ query {
   }
 }
 ''';
-
-
-/**
- * 
- * query {
-  Viewer {
-    id
-    name
-    about
-    avatar {
-      large
-    }
-  }
-}
- */

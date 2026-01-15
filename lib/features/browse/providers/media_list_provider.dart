@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hoshi_list/models/media.dart';
@@ -7,7 +8,7 @@ import 'package:hoshi_list/services/anilist/anilist_client.dart';
 import 'package:hoshi_list/services/anilist/anilist_provider.dart';
 import 'package:hoshi_list/services/anilist/mappers/media_list_mapper.dart';
 
-final mediaMapper = MediaMapper();
+final mediaMapper = MediaListMapper();
 
 final mediaListProvider =
     AsyncNotifierProvider.family<MediaListNotifier, List<Media>, MediaQueryAL>(
@@ -28,7 +29,8 @@ class MediaListNotifier extends AsyncNotifier<List<Media>> {
   Future<List<Media>> build() async {
     _alClient = ref.watch(anilistProvider);
     final response = await _alClient.fetchMedia(mediaQuery);
-    final result = mediaMapper.mapMediaList(response);
+    final decodedData = jsonDecode(response.body) as Map<String, dynamic>;
+    final result = mediaMapper.mapMediaList(decodedData);
 
     _currentPage++;
     _hasNextPage = result.isNotEmpty;
@@ -44,7 +46,8 @@ class MediaListNotifier extends AsyncNotifier<List<Media>> {
     try {
       final nextQuery = mediaQuery.copyWith(page: _currentPage);
       final response = await _alClient.fetchMedia(nextQuery);
-      final nextItems = mediaMapper.mapMediaList(response);
+      final decodedData = jsonDecode(response.body) as Map<String, dynamic>;
+      final nextItems = mediaMapper.mapMediaList(decodedData);
 
       if (nextItems.isEmpty) {
         _hasNextPage = false;
