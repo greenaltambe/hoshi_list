@@ -4,6 +4,7 @@ import 'package:hoshi_list/models/constants/media_sort.dart';
 import 'package:hoshi_list/models/constants/media_type.dart';
 import 'package:hoshi_list/models/media_character.dart';
 import 'package:hoshi_list/models/media_list_query.dart';
+import 'package:hoshi_list/models/media_mutation_query.dart';
 import 'package:hoshi_list/models/review.dart';
 import 'package:hoshi_list/models/staff.dart';
 import 'package:hoshi_list/services/anilist/queries/character_details_query_string.dart';
@@ -11,6 +12,7 @@ import 'package:hoshi_list/services/anilist/queries/characters_list_query_string
 import 'package:hoshi_list/services/anilist/queries/media_details_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_list_collection_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_list_query_string.dart';
+import 'package:hoshi_list/services/anilist/queries/media_mutation_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_recommendation_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_relations_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_review_list_query_string.dart';
@@ -188,5 +190,33 @@ class AnilistClient {
   ) async {
     final variables = {"type": mediaType.name.toUpperCase(), "userId": userId};
     return _performQuery(mediaListCollectionQueryString, variables);
+  }
+
+  Future<http.Response> saveMediaMutation(
+    MediaMutationQuery mediaMutation,
+  ) async {
+    final variables = {
+      "mediaId": mediaMutation.mediaId,
+      "status": mediaMutation.mediaListStatus.name.toUpperCase(),
+      if (mediaMutation.progress != null) "progress": mediaMutation.progress!,
+      if (mediaMutation.score != null) "score": mediaMutation.score!,
+      if (mediaMutation.scoreRaw != null) "scoreRaw": mediaMutation.scoreRaw!,
+      if (mediaMutation.repeat != null) "repeat": mediaMutation.repeat!,
+      if (mediaMutation.notes != null) "notes": mediaMutation.notes!,
+      if (mediaMutation.startedAt != null)
+        "startedAt": {
+          "year": mediaMutation.startedAt!.year,
+          "month": mediaMutation.startedAt!.month,
+          "day": mediaMutation.startedAt!.day,
+        },
+      if (mediaMutation.completedAt != null)
+        "completedAt": {
+          "year": mediaMutation.completedAt!.year,
+          "month": mediaMutation.completedAt!.month,
+          "day": mediaMutation.completedAt!.day,
+        },
+    };
+
+    return _performQuery(saveMediaMutationQueryString, variables);
   }
 }

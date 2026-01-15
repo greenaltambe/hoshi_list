@@ -349,14 +349,9 @@ class FilterOption extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // 1. The Label
         Text(title, style: Theme.of(context).textTheme.bodyLarge),
 
         const SizedBox(width: 16), // Add a little spacing
-        // 2. The Field (The Fix)
-        // We use Expanded to force the field to occupy the remaining space.
-        // We wrap the field in Align to respect your fixed-width fields (like 'Min Episodes')
-        // while allowing Dropdowns to fill the available space safely.
         Expanded(
           child: Align(alignment: Alignment.centerRight, child: field),
         ),

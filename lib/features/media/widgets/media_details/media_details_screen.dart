@@ -5,6 +5,7 @@ import 'package:hoshi_list/features/media/widgets/media_details/media_detail_tab
 import 'package:hoshi_list/features/media/widgets/media_details/media_detail_tabs/relations_tab.dart';
 import 'package:hoshi_list/features/media/widgets/media_details/media_detail_tabs/review_list_tab.dart';
 import 'package:hoshi_list/features/media/widgets/media_details/media_detail_tabs/staff_list_tab.dart';
+import 'package:hoshi_list/features/media/widgets/media_details/media_details_widgets/media_mutation_bottom_sheet.dart';
 import 'package:hoshi_list/models/media.dart';
 import 'package:hoshi_list/features/media/providers/media_details_provider.dart';
 import 'package:hoshi_list/features/media/widgets/media_details/media_details_widgets/header_info.dart';
@@ -35,6 +36,26 @@ class _MediaDetailsScreenState extends ConsumerState<MediaDetailsScreen> {
       length: 6,
       child: Scaffold(
         extendBodyBehindAppBar: true,
+        floatingActionButton: mediaDetails.when(
+          loading: () => FloatingActionButton(
+            onPressed: () {},
+            child: const CircularProgressIndicator(),
+          ),
+          error: (error, stackTrace) => null,
+          data: (data) => FloatingActionButton.extended(
+            onPressed: () {
+              showModalBottomSheet(
+                isScrollControlled: true,
+                context: context,
+                builder: (context) =>
+                    MediaMutationBottomSheet(mediaDetails: data),
+              );
+            },
+            label: const Text('Edit'),
+            icon: const Icon(Icons.edit),
+          ),
+        ),
+
         body: mediaDetails.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stack) => Center(child: Text('Error: $error')),
