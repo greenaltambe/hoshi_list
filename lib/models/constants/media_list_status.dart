@@ -25,12 +25,12 @@ Map<MediaListStatus, Icon> mediaListStatusToIcon = {
 };
 
 Map<String, MediaListStatus> stringToMediaListStatus = {
-  "Completed": MediaListStatus.completed,
-  "Current": MediaListStatus.current,
-  "Dropped": MediaListStatus.dropped,
-  "Paused": MediaListStatus.paused,
-  "Planning": MediaListStatus.planning,
-  "Repeating": MediaListStatus.repeating,
+  "COMPLETED": MediaListStatus.completed,
+  "CURRENT": MediaListStatus.current,
+  "DROPPED": MediaListStatus.dropped,
+  "PAUSED": MediaListStatus.paused,
+  "PLANNING": MediaListStatus.planning,
+  "REPEATING": MediaListStatus.repeating,
 };
 
 Map<MediaListStatus, String> mediaListStatusToString = {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hoshi_list/features/media/providers/media_progress_provider.dart';
 import 'package:hoshi_list/models/constants/media_list_status.dart';
 import 'package:hoshi_list/models/media.dart';
 import 'package:hoshi_list/models/media_mutation_query.dart';
+import 'package:hoshi_list/models/media_tracking_status.dart';
 import 'package:hoshi_list/services/anilist/anilist_provider.dart';
 
 class MediaMutationBottomSheet extends ConsumerStatefulWidget {
@@ -31,6 +33,8 @@ class _MediaMutationBottomSheetState
 
   bool _isSubmitting = false;
 
+  bool _isFormInitialized = false;
+
   @override
   void dispose() {
     _startAtController.dispose();
@@ -40,6 +44,26 @@ class _MediaMutationBottomSheetState
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(mediaProgressProvider(widget.mediaDetails.id), (prev, next) {
+      next.when(
+        data: (data) {
+          if (!_isFormInitialized) {
+            _populateForm(data);
+          }
+        },
+        error: (err, stackTrace) {
+          throw Exception('Failed to load media progress: $err');
+        },
+        loading: () {},
+      );
+    });
+
+    final asyncValue = ref.watch(mediaProgressProvider(widget.mediaDetails.id));
+
+    if (asyncValue.isLoading && !_isFormInitialized) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
     return DraggableScrollableSheet(
       expand: false,
       maxChildSize: 0.9,
@@ -108,6 +132,9 @@ class _MediaMutationBottomSheetState
                       label: 'Score',
                       field: TextFormField(
                         keyboardType: TextInputType.number,
+                        initialValue: _formRawScore != null
+                            ? '$_formRawScore'
+                            : null,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return null; // Allow empty input
@@ -146,6 +173,9 @@ class _MediaMutationBottomSheetState
                       label: 'Episodes/Chapters',
                       field: TextFormField(
                         keyboardType: TextInputType.number,
+                        initialValue: _formProgress != null
+                            ? '$_formProgress'
+                            : null,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return null; // Allow empty input
@@ -254,6 +284,9 @@ class _MediaMutationBottomSheetState
                       label: 'Repeat Count',
                       field: TextFormField(
                         keyboardType: TextInputType.number,
+                        initialValue: _formRepeat != null
+                            ? '$_formRepeat'
+                            : null,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return null; // Allow empty input
@@ -288,6 +321,7 @@ class _MediaMutationBottomSheetState
                     FormFieldCustom(
                       label: 'Notes',
                       field: TextFormField(
+                        initialValue: _formNotes ?? '',
                         keyboardType: TextInputType.multiline,
                         minLines: 3,
                         maxLines: 10,
@@ -343,6 +377,30 @@ class _MediaMutationBottomSheetState
         ),
       ),
     );
+  }
+
+  void _populateForm(MediaTrackingStatus data) {
+    setState(() {
+      _isFormInitialized = true; // Mark as initialized
+
+      _formStatus = data.mediaListStatus;
+      _formProgress = data.progress;
+      _formRawScore = data.scoreRaw;
+      _formRepeat = data.repeat;
+      _formNotes = data.notes;
+
+      if (data.startedAt != null) {
+        _formStartedAt = data.startedAt;
+        _startAtController.text =
+            '${_formStartedAt!.year}-${_formStartedAt!.month.toString().padLeft(2, '0')}-${_formStartedAt!.day.toString().padLeft(2, '0')}';
+      }
+
+      if (data.completedAt != null) {
+        _formCompletedAt = data.completedAt;
+        _completedAtController.text =
+            '${_formCompletedAt!.year}-${_formCompletedAt!.month.toString().padLeft(2, '0')}-${_formCompletedAt!.day.toString().padLeft(2, '0')}';
+      }
+    });
   }
 
   Future<void> _submitForm() async {

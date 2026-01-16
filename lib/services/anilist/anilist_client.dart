@@ -13,6 +13,7 @@ import 'package:hoshi_list/services/anilist/queries/media_details_query_string.d
 import 'package:hoshi_list/services/anilist/queries/media_list_collection_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_mutation_query_string.dart';
+import 'package:hoshi_list/services/anilist/queries/media_progress_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_recommendation_list_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_relations_query_string.dart';
 import 'package:hoshi_list/services/anilist/queries/media_review_list_query_string.dart';
@@ -218,5 +219,10 @@ class AnilistClient {
     };
 
     return _performQuery(saveMediaMutationQueryString, variables);
+  }
+
+  Future<http.Response> fetchMediaProgress(int mediaId) async {
+    final variables = {"id": mediaId};
+    return _performQuery(mediaProgressQueryString, variables);
   }
 }
