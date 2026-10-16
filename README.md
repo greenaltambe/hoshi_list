@@ -1,16 +1,28 @@
-# hoshi_list
+# HoshiList
 
-A flutter based anilist client.
+A Flutter client for [AniList](https://anilist.co): browse and search anime and manga, see details, and manage your own list.
 
-## Getting Started
+## Running
 
-This project is a starting point for a Flutter application.
+```sh
+flutter pub get
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
+Logging in opens AniList in the browser and returns through the `hoshilist://auth` deep link. To use your own AniList API client, register one with the redirect URL `hoshilist://auth` and run with:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```sh
+flutter run --dart-define=ANILIST_CLIENT_ID=<your id>
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Checks
+
+```sh
+flutter analyze
+flutter test
+```
+
+## Documentation
+
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): how the code is organised and why.
+- [docs/DEVELOPMENT_GUIDE.md](docs/DEVELOPMENT_GUIDE.md): recipes for adding features, plus a prioritised improvement backlog.
